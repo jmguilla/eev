@@ -1,0 +1,33 @@
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+body { padding-top: 50px; }
+
+/* this is used by ng to hide content before the app is fully loaded */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+a.navbar-brand {
+	color: #428bca !important;
+}
+
+.navbar { height: 50px; }
+
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.top-buffer { padding-top:10px; }
+.bottom-buffer { padding-bottom:10px; }
+
+.caption {text-align:center;}
+
