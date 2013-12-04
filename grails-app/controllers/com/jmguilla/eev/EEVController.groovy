@@ -27,39 +27,42 @@ class EEVController {
     }
   }
 
-  def save(){
+  def save(EEV eev){
     if(!request.post){
       response.sendError(303)
     }
     withFormat{
       json{
         def result = [:]
-        def eev = EEV.get(params.id)
         def incoming = request.JSON
-        if(!eev){
-          //new creation
-          params.id = null
-          eev = new EEV(params)
+        if(!params.id){
+          //new creation save check, nullify id
           result['type'] = 'success'
-          result['content'] ='Nouveau EEV créé'
+          result['content'] ='Nouveau EEV cree'
         }else{
           //update
+          eev = EEV.get(params.id)
           bindData(eev, incoming)
           result['type'] = 'success'
-          result['content'] ='EEV mis à jour'
+          result['content'] ='EEV mis a jour'
         }
         response.status = 200
-        if (eev.hasErrors()) {
+        try{
+          eev.interviewer = eev.interviewer?.save(failOnError: true)
+          eev.interviewee = eev.interviewee?.save(failOnError: true)
+          for(group in eev.groups){
+            group.save(failOnError: true)
+          }
+          eev = eev.save(failOnError: true, flush: true)
+        }catch(Throwable t){
           result['type'] = 'danger'
-          result['content'] = EEVInstance.errors
-          response.status = 400
+          result['content'] = t.toString()
         }
-        result['model'] = eev
-        eev.save(failOnError: true, flush: true)
-        JSON.use('deep'){ render(eev as JSON) }
+        result['model'] = ['eev': eev]
+        JSON.use('deep'){ render(result as JSON) }
       }
+      '*'{ response.sendError(305) }
     }
-    '*'{ response.sendError(305) }
   }
 
   def show(){
@@ -105,7 +108,9 @@ class EEVController {
         ])
         redirect EEVInstance
       }
-      '*'{ respond EEVInstance, [status: OK] }
+      '*'{
+        respond EEVInstance, [status: OK]
+      }
     }
   }
 

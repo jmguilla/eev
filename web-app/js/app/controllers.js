@@ -11,9 +11,19 @@ app.controller('eevShowCtrl', function($scope, EEV) {
 		function(httpResponse){
 			$scope.alerts.push(httpResponse.data)
 		});
-	}
-	$scope.answer = function(){
-		$scope.eev.answer()
-	}
-  $scope.alerts = []
+	};
+	$scope.save = function(){
+		if($scope.eev.template == true){
+			$scope.eev.id = null;
+		}
+		EEV.save({eevId: ''}, $scope.eev,
+		function(content, headers){
+			$scope.alerts.push(content)
+			$scope.eev = content.model.eev
+		},
+		function(httpResponse){
+			$scope.alerts.push(httpResponse.data)
+			$scope.eev = httpResponse.data.model.eev
+		})
+	};
 });

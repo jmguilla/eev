@@ -2,6 +2,7 @@ package com.jmguilla.eev
 
 class User {
 
-    static constraints = {
-    }
+  String email
+
+  static constraints = { email(nullable: true) }
 }

@@ -3,12 +3,13 @@ package com.jmguilla.eev
 class EEV {
 
   String title
-  User owner, interviewee
-  
+  User interviewer, interviewee
+  Boolean template = true
+
   static hasMany = [groups: EEVRowsGroup]
 
   static constraints = {
-    owner(nullable: true)
+    interviewer(nullable: true)
     interviewee(nullable: true)
     groups(nullable: true)
   }

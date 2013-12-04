@@ -17,11 +17,11 @@
 			<div class="form-group">
 			  <label class="col-xs-12" for="interviewee">Email Interviewe</label>
 			  <div class="col-xs-12">
-			  	<input ng-model="eev.interviewee" type="email" class="form-control" id="interviewee" placeholder="Email interviewe">
+			  	<input ng-model="eev.interviewee.email" type="email" class="form-control" id="interviewee" placeholder="Email interviewe">
 			  </div>
 			</div>
 			</form>
-			<button ng-click="answer()" type="button" class="btn btn-default">Répondu</button>
+			<button ng-click="save()" type="button" class="btn btn-default">Sauver</button>
 			<div ng-repeat="group in eev.groups" class="panel panel-primary">
 			<div class="panel-heading">{{group.title}}</div>
 			<div class="panel-body">
@@ -37,7 +37,7 @@
 				</table>
 			</div>
 			</div>
-			<button ng-click="answer()" type="button" class="btn btn-default">Répondu</button>
+			<button ng-click="save()" type="button" class="btn btn-default">Sauver</button>
 		</div>
 	</body>
 </html>

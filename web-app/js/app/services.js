@@ -13,10 +13,10 @@ factory('EEV', function($resource){
   			'Accept': 'application/json'
   		}
   	},
-	  answer: {
+  	save: {
 		  method: 'POST',
 		  params: {
-			  actionId: 'answer',
+			  actionId: 'save',
 		  },
   		headers: {
   			'Content-Type': 'application/json',
