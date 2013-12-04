@@ -21,16 +21,47 @@ class EEVController {
     }
     withFormat{
       json{
-        JSON.use('deep'){
-          render (eev as JSON)
-        }
+        JSON.use('deep'){ render (eev as JSON) }
       }
-      '*'{
-        response.sendError(305)
-      }
+      '*'{ response.sendError(305) }
     }
   }
-  
+
+  def save(){
+    if(!request.post){
+      response.sendError(303)
+    }
+    withFormat{
+      json{
+        def result = [:]
+        def eev = EEV.get(params.id)
+        def incoming = request.JSON
+        if(!eev){
+          //new creation
+          params.id = null
+          eev = new EEV(params)
+          result['type'] = 'success'
+          result['content'] ='Nouveau EEV créé'
+        }else{
+          //update
+          bindData(eev, incoming)
+          result['type'] = 'success'
+          result['content'] ='EEV mis à jour'
+        }
+        response.status = 200
+        if (eev.hasErrors()) {
+          result['type'] = 'danger'
+          result['content'] = EEVInstance.errors
+          response.status = 400
+        }
+        result['model'] = eev
+        eev.save(failOnError: true, flush: true)
+        JSON.use('deep'){ render(eev as JSON) }
+      }
+    }
+    '*'{ response.sendError(305) }
+  }
+
   def show(){
     def eev = EEV.get(params.id)
     if(!eev){
@@ -46,32 +77,6 @@ class EEVController {
 
   def create() {
     respond new EEV(params)
-  }
-
-  @Transactional
-  def save(EEV EEVInstance) {
-    if (EEVInstance == null) {
-      notFound()
-      return
-    }
-
-    if (EEVInstance.hasErrors()) {
-      respond EEVInstance.errors, view:'create'
-      return
-    }
-
-    EEVInstance.save flush:true
-
-    request.withFormat {
-      form {
-        flash.message = message(code: 'default.created.message', args: [
-          message(code: 'EEVInstance.label', default: 'EEV'),
-          EEVInstance.id
-        ])
-        redirect EEVInstance
-      }
-      '*' { respond EEVInstance, [status: CREATED] }
-    }
   }
 
   def edit(EEV EEVInstance) {
