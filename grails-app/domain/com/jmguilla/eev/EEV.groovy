@@ -4,8 +4,8 @@ class EEV {
 
   String title
   User interviewer, interviewee
-  Boolean template = true
-
+  Boolean template = Boolean.TRUE
+  
   static hasMany = [groups: EEVRowsGroup]
 
   static constraints = {

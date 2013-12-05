@@ -11,13 +11,16 @@ class EEVController {
 
   static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-  def get(){
+  def getTemplate(){
     if(!request.method.equalsIgnoreCase('get')){
       response.sendError(303)
     }
     def eev = EEV.get(params.id)
     if(!eev){
       response.sendError(404)
+    }
+    if(!eev.template){
+      response.sendError(400)
     }
     withFormat{
       json{
@@ -27,38 +30,51 @@ class EEVController {
     }
   }
 
-  def save(EEV eev){
-    if(!request.post){
+  def get(){
+    if(!request.method.equalsIgnoreCase('get')){
       response.sendError(303)
+    }
+    def eev = EEV.get(params.id)
+    if(!eev){
+      response.sendError(404)
+    }
+    if(eev.template){
+      response.sendError(400)
     }
     withFormat{
       json{
-        def result = [:]
-        def incoming = request.JSON
+        JSON.use('deep'){ render (eev as JSON) }
+      }
+      '*'{ response.sendError(305) }
+    }
+  }
+
+  def answer(){
+    withFormat{
+      html{
         if(!params.id){
-          //new creation save check, nullify id
+          response.sendError(404)
+        }
+        render view: 'answer', model: [params: params]
+      }
+      json{
+        def result = [:]
+        if(!request.post){
+          response.sendError(303)
+        }
+        try{
+          def eev = new EEV(request.JSON)
+          bindData(eev, request.JSON)
+          eev.template = false
+          eev.id = null
           result['type'] = 'success'
           result['content'] ='Nouveau EEV cree'
-        }else{
-          //update
-          eev = EEV.get(params.id)
-          bindData(eev, incoming)
-          result['type'] = 'success'
-          result['content'] ='EEV mis a jour'
-        }
-        response.status = 200
-        try{
-          eev.interviewer = eev.interviewer?.save(failOnError: true)
-          eev.interviewee = eev.interviewee?.save(failOnError: true)
-          for(group in eev.groups){
-            group.save(failOnError: true)
-          }
           eev = eev.save(failOnError: true, flush: true)
+          result['model'] = ['eev': eev]
         }catch(Throwable t){
           result['type'] = 'danger'
           result['content'] = t.toString()
         }
-        result['model'] = ['eev': eev]
         JSON.use('deep'){ render(result as JSON) }
       }
       '*'{ response.sendError(305) }
