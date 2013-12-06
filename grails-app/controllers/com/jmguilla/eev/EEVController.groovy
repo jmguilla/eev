@@ -6,6 +6,8 @@ import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
 import grails.transaction.Transactional
 
+import org.codehaus.groovy.grails.web.json.JSONObject
+
 @Transactional(readOnly = true)
 class EEVController {
 
@@ -50,12 +52,24 @@ class EEVController {
   }
 
   def answer(){
+    fillImpl(request, response, params, new EEV(request.JSON))
+  }
+
+  def edit(){
+    def eev = EEV.get(params.id)
+    if(!eev || eev.template){
+      response.sendError(404)
+    }
+    fillImpl(request, response, params, eev)
+  }
+
+  def protected fillImpl(request, response, params, EEV eev){
     withFormat{
       html{
         if(!params.id){
           response.sendError(404)
         }
-        render view: 'answer', model: [params: params]
+        render view: 'fill', model: [params: params]
       }
       json{
         def result = [:]
@@ -63,15 +77,14 @@ class EEVController {
           response.sendError(303)
         }
         try{
-          def eev = new EEV(request.JSON)
-          bindData(eev, request.JSON)
+          bindEEV(eev, request.JSON)
           eev.template = false
-          eev.id = null
           result['type'] = 'success'
           result['content'] ='Nouveau EEV cree'
           eev = eev.save(failOnError: true, flush: true)
           result['model'] = ['eev': eev]
         }catch(Throwable t){
+          response.status = 500
           result['type'] = 'danger'
           result['content'] = t.toString()
         }
@@ -96,10 +109,6 @@ class EEVController {
 
   def create() {
     respond new EEV(params)
-  }
-
-  def edit(EEV EEVInstance) {
-    respond EEVInstance
   }
 
   @Transactional
@@ -163,5 +172,45 @@ class EEVController {
       }
       '*'{ render status: NOT_FOUND }
     }
+  }
+
+  protected void bindEEV(EEV eev, JSONObject input){
+    //TODO switch to services
+    bindData(eev, input)
+    for(group in input.groups){
+      def newGroup = (eev.id?EEVRowsGroup.get(group.id): new EEVRowsGroup(group))
+      bindData(newGroup, group)
+      newGroup = newGroup.save(failOnError: true)
+      for(row in group.rows){
+        def newRow = (eev.id?EEVRow.get(row.id):new EEVRow(row))
+        bindData(newRow, row)
+        newRow.group = newGroup
+        def newQuestionClass = grailsApplication.getDomainClass(row.question.class).clazz
+        def newQuestion = (eev.id?newQuestionClass.get(row.question.id): newQuestionClass.newInstance())
+        bindData(newQuestion, row.question)
+        def newAnswerClass = grailsApplication.getDomainClass(row.answer.class).clazz
+        def newAnswer = (eev.id?newAnswerClass.get(row.answer.id): newAnswerClass.newInstance())
+        bindData(newAnswer, row.answer)
+        newRow.question = newQuestion.save(failOnError: true)
+        newRow.answer = newAnswer.save(failOnError: true)
+        newGroup.addToRows(newRow.save(failOnError: true))
+      }
+      newGroup = newGroup.save(failOnError: true)
+      eev.addToGroups(newGroup)
+    }
+    def interviewee = User.findByEmailIlike(input.interviewee.email)
+    if(!interviewee){
+      interviewee = new User()
+      interviewee.email = input.interviewee.email
+    }
+    bindData(interviewee, input.interviewee, [exclude: ['email', 'class']])
+    eev.interviewee = interviewee.save(failOnError: true)
+    def interviewer = User.findByEmailIlike(input.interviewer.email)
+    if(!interviewer){
+      interviewer = new User()
+      interviewer.email = input.interviewer.email
+    }
+    bindData(interviewer, input.interviewer, [exclude: ['email', 'class']])
+    eev.interviewer = interviewer.save(failOnError: true)
   }
 }

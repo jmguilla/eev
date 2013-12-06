@@ -8,8 +8,8 @@
 		<r:require module="bootstrap"/>
 	</head>
 	<body>
-		<div ng-app="eev" ng-controller="eevAnswerCtrl" ng-init="init(${params.id})">
-			<div ng-repeat="alert in alerts" class="alert alert-{{alert.type}} alert-dismissable">
+		<div ng-app="eev" ng-controller="EEVFillCtrl" ng-init="init(${params.id}, '${params.action}')">
+			<div class="col-xs-12" ng-repeat="alert in alerts" class="alert alert-{{alert.type}} alert-dismissable">
 			  <button ng-click="alerts.splice($index, 1)" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			  {{alert.content}}
 			</div>
@@ -22,23 +22,23 @@
 			  </div>
 			</div>
 			</form>
-			<button ng-click="answer()" type="button" class="btn btn-default">Repondre</button>
+			<button ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
 			<div ng-repeat="group in eev.groups" class="panel panel-primary">
 			<div class="panel-heading">{{group.title}}</div>
 			<div class="panel-body">
 				<table class="table table-hover">
 					<tr><td></td><td>:D</td><td>:)</td><td>:|</td><td>:(</td></tr>
-					<tr ng-repeat="row in group.rows">
+					<tr ng-repeat="row in group.rows|orderBy:'rank'">
 						<td>{{row.question.question}}</td>
-						<td><input type="radio" ng-model="row.answer" value="0"/></td>
-						<td><input type="radio" ng-model="row.answer" value="1"/></td>
-						<td><input type="radio" ng-model="row.answer" value="2"/></td>
-						<td><input type="radio" ng-model="row.answer" value="3"/></td>
+						<td><input type="radio" ng-model="row.answer.answer" value="0"/></td>
+						<td><input type="radio" ng-model="row.answer.answer" value="1"/></td>
+						<td><input type="radio" ng-model="row.answer.answer" value="2"/></td>
+						<td><input type="radio" ng-model="row.answer.answer" value="3"/></td>
 					</tr>
 				</table>
 			</div>
 			</div>
-			<button ng-click="answer()" type="button" class="btn btn-default">Repondre</button>
+			<button ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
 		</div>
 	</body>
 </html>

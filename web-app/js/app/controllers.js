@@ -1,24 +1,36 @@
 'use strict';
 /* Controllers */
-app.controller('eevAnswerCtrl', function($scope, EEV) {
+app.controller('EEVFillCtrl', function($scope, EEV) {
 	$scope.alerts = []
-	$scope.init = function(eevId){
+	$scope.init = function(eevId, action) {
 		$scope.eevId = eevId;
-		EEV.getTemplate({eevId: eevId},
-		function(response, headers){
-			$scope.eev = response;
-		},
-		function(httpResponse){
-			$scope.alerts.push(httpResponse.data)
-		});
+		$scope.action = action;
+		if (action.toUpperCase() == "ANSWER") {
+			EEV.getTemplate({
+				eevId : eevId
+			}, function(response, headers) {
+				$scope.eev = response;
+			}, function(httpResponse) {
+				$scope.alerts.push(httpResponse.data)
+			});
+		} else {
+			EEV.get({
+				eevId : eevId
+			}, function(response, headers) {
+				$scope.eev = response;
+			}, function(httpResponse) {
+				$scope.alerts.push(httpResponse.data)
+			});
+		}
 	};
-	$scope.answer = function(){
-		EEV.answer({eevId: ''}, $scope.eev,
-		function(content, headers){
+	$scope.fill = function() {
+		EEV.save({
+			eevId : $scope.eevId,
+			actionId: $scope.action
+		}, $scope.eev, function(content, headers) {
 			$scope.alerts.push(content)
 			$scope.eev = content.model.eev
-		},
-		function(httpResponse){
+		}, function(httpResponse) {
 			$scope.alerts.push(httpResponse.data)
 			$scope.eev = httpResponse.data.model.eev
 		})

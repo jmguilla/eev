@@ -1,12 +1,10 @@
 package com.jmguilla.eev
 
-class EEVRowsGroup {
+class EEVRowsGroup implements Serializable{
 
   String title
 
   static hasMany = [rows: EEVRow]
 
-  static constraints = {
-    rows(nullable: true)
-  }
+  static constraints = { rows(nullable: true) }
 }

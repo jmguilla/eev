@@ -4,5 +4,8 @@ class User {
 
   String email
 
-  static constraints = { email(nullable: true) }
+  static constraints = {
+  }
+
+  static mapping = { id name: 'email', generator: 'assigned' }
 }

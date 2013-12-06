@@ -2,9 +2,14 @@ package com.jmguilla.eev
 
 class MagnitudeAnswer extends Answer{
 
-  Integer level
+  Integer answer = new Integer(-1)
+
   static constraints = {
     importFrom Answer
-    level(nullable: false, min: 0, max:3)
+    answer(nullable: false, min: -1, max:3)
+  }
+  
+  static mapping = {
+    answer defaultValue: -1
   }
 }

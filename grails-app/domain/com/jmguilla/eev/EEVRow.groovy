@@ -6,9 +6,8 @@ class EEVRow {
   Question question
   Answer answer
 
-  static belongsTo = [eevGroup: EEVRowsGroup]
+  static belongsTo = [group: EEVRowsGroup]
   
   static constraints = {
-    answer(nullable: true)
   }
 }

@@ -9,8 +9,6 @@ class EEV {
   static hasMany = [groups: EEVRowsGroup]
 
   static constraints = {
-    interviewer(nullable: true)
-    interviewee(nullable: true)
     groups(nullable: true)
   }
 }
