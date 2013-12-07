@@ -10,6 +10,7 @@ modules = {
     resource url: 'js/lib/angular-1.2.1/angular.js'
     resource url: 'js/lib/angular-1.2.1/angular-resource.js'
     resource url: 'js/lib/angular-1.2.1/angular-route.js'
+    resource url: 'js/lib/angular-1.2.1/angular-sanitize.js'
   }
   angular_app {
     dependsOn 'angular'

@@ -80,7 +80,7 @@ class EEVController {
           bindEEV(eev, request.JSON)
           eev.template = false
           result['type'] = 'success'
-          result['content'] ='Nouveau EEV cree'
+          result['content'] ='<strong>Nouvel EEV cree</strong>'
           eev = eev.save(failOnError: true, flush: true)
           result['model'] = ['eev': eev]
         }catch(Throwable t){
@@ -202,15 +202,15 @@ class EEVController {
     if(!interviewee){
       interviewee = new User()
       interviewee.email = input.interviewee.email
+      interviewee = interviewee.save(failOnError: true)
     }
-    bindData(interviewee, input.interviewee, [exclude: ['email', 'class']])
-    eev.interviewee = interviewee.save(failOnError: true)
+    eev.interviewee = interviewee
     def interviewer = User.findByEmailIlike(input.interviewer.email)
     if(!interviewer){
       interviewer = new User()
       interviewer.email = input.interviewer.email
+      interviewer = interviewer.save(failOnError: true)
     }
-    bindData(interviewer, input.interviewer, [exclude: ['email', 'class']])
-    eev.interviewer = interviewer.save(failOnError: true)
+    eev.interviewer = interviewer
   }
 }
