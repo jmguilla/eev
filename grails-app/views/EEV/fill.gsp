@@ -9,13 +9,6 @@
 	</head>
 	<body>
 		<div class="col-xs-12" ng-app="eev" ng-controller="EEVFillCtrl" ng-init="init(${params.id}, '${params.action}')">
-			<pre>{{radioModel}}</pre>
-			<input type="text" ng-model="radioModel"/>
-		    <div class="btn-group">
-		        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Left'">Left</button>
-		        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'">Middle</button>
-		        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Right'">Right</button>
-		    </div>
 			<div class="row">
 				<div class="col-xs-12">
 					<div ng-repeat="alert in alerts" class="alert alert-{{alert.type}} alert-dismissable">
@@ -54,12 +47,11 @@
 								<td ng-show="content.flattened" colspan="2"><span ng-bind-html="content.title" ></span></td>
 								<td ng-hide="content.flattened"><span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span></td>
 								<td ng-hide="content.flattened">
-									<div class="btn-group pull-right" data-toggle="buttons">
-										<button class="btn btn-default" name="answer{{$index}}" ng-class="{active:content.answer.answer === 3}" ng-click="content.answer.answer = 3">:D</button>
-										<button class="btn btn-default" name="answer{{$index}}" ng-class="{active:content.answer.answer === 2}" ng-click="content.answer.answer = 2">:)</button>
-										<button class="btn btn-default" name="answer{{$index}}" ng-class="{active:content.answer.answer === 1}" ng-click="content.answer.answer = 1">:|</button>
-										<button class="btn btn-default" name="answer{{$index}}" ng-class="{active:content.answer.answer === 0}" ng-click="content.answer.answer = 0">:(</button>
-										<input type="text" ng-model="content.answer.answer"/>
+									<div class="btn-group pull-right">
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':content.answer.answer == '3'}" ng-click="content.answer.answer = '3'">:-D</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':content.answer.answer == '2'}" ng-click="content.answer.answer = '2'">:-)</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':content.answer.answer == '1'}" ng-click="content.answer.answer = '1'">:-|</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':content.answer.answer == '0'}" ng-click="content.answer.answer = '0'">:-(</button>
 									</div>
 								</td>
 							</tr>
