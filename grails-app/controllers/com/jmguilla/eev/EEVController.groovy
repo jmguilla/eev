@@ -49,7 +49,8 @@ class EEVController {
   }
 
   def answer(){
-    fillImpl(request, response, params, new EEV(), false)
+    def eev = new EEV(template: false).save(failOnError: true)
+    fillImpl(request, response, params, eev, false)
   }
 
   def edit(){
@@ -176,7 +177,7 @@ class EEVController {
     //TODO switch to services
     bindData(eev, input)
     for(group in input.contents){
-      def newGroup = (update?EEVRowsGroup.get(group.id): new EEVRowsGroup(group))
+      def newGroup = (update?EEVRowsGroup.get(group.id): new EEVRowsGroup())
       bindGroup(update, newGroup, group)
       eev.addToContents(newGroup.save(failOnError: true))
     }
@@ -196,30 +197,29 @@ class EEVController {
     eev.interviewer = interviewer
   }
   
-  def bindGroup(update, newGroup, group){
+  def bindGroup(boolean update, EEVRowsGroup newGroup, JSONObject group){
     bindData(newGroup, group)
-    newGroup = newGroup.save(failOnError: true)
     for(content in group.contents){
       def newContent = null
       if(content.contents){
-        newContent = (update?EEVRowsGroup.get(group.id): new EEVRowsGroup(content))
+        newContent = (update?EEVRowsGroup.get(content.id): new EEVRowsGroup())
         bindGroup(update, newContent, content)
       }else{
-        newContent = (update?EEVRow.get(content.id):new EEVRow(content))
+        newContent = (update?EEVRow.get(content.id):new EEVRow())
         bindRow(update, newContent, content)
       }
       newGroup.addToContents(newContent.save(failOnError: true))
     }
   }
   
-  def bindRow(update, newRow, content){
-    bindData(newRow, content)
+  def bindRow(boolean update, EEVRow newRow, JSONObject content){
     def newQuestionClass = grailsApplication.getDomainClass(content.question.class).clazz
     def newQuestion = (update?newQuestionClass.get(content.question.id): newQuestionClass.newInstance())
-    bindData(newQuestion, content.question)
     def newAnswerClass = grailsApplication.getDomainClass(content.answer.class).clazz
     def newAnswer = (update?newAnswerClass.get(content.answer.id): newAnswerClass.newInstance())
-    bindData(newAnswer, content.answer)
+    newAnswer.answer = new Integer(content.answer.answer)
+    newQuestion.question = content.question.question
+    newRow.rank = content.rank
     newRow.question = newQuestion.save(failOnError: true)
     newRow.answer = newAnswer.save(failOnError: true)
   }
