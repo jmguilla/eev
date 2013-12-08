@@ -49,7 +49,7 @@ class EEVController {
   }
 
   def answer(){
-    fillImpl(request, response, params, new EEV(request.JSON))
+    fillImpl(request, response, params, new EEV(), false)
   }
 
   def edit(){
@@ -57,10 +57,10 @@ class EEVController {
     if(!eev || eev.template){
       response.sendError(404)
     }
-    fillImpl(request, response, params, eev)
+    fillImpl(request, response, params, eev, true)
   }
 
-  def protected fillImpl(request, response, params, EEV eev){
+  def protected fillImpl(request, response, params, EEV eev, boolean update){
     withFormat{
       html{
         if(!params.id){
@@ -74,12 +74,12 @@ class EEVController {
           response.sendError(303)
         }
         try{
-          bindEEV(eev, request.JSON)
+          bindEEV(eev, request.JSON, update)
           eev.template = false
           result['type'] = 'success'
           result['content'] ='<strong>Nouvel EEV cree</strong>'
-          eev = eev.save(failOnError: true, flush: true)
           result['model'] = ['eev': eev]
+          eev = eev.save(failOnError: true, flush: true)
         }catch(Throwable t){
           log.error('Cannot answer the eev', t)
           response.status = 500
@@ -172,12 +172,12 @@ class EEVController {
     }
   }
 
-  protected void bindEEV(EEV eev, JSONObject input){
+  protected void bindEEV(EEV eev, JSONObject input, boolean update){
     //TODO switch to services
     bindData(eev, input)
     for(group in input.contents){
-      def newGroup = (eev.id?EEVRowsGroup.get(group.id): new EEVRowsGroup(group))
-      bindGroup(eev.id, newGroup, group)
+      def newGroup = (update?EEVRowsGroup.get(group.id): new EEVRowsGroup(group))
+      bindGroup(update, newGroup, group)
       eev.addToContents(newGroup.save(failOnError: true))
     }
     def interviewee = User.findByEmailIlike(input.interviewee.email)
