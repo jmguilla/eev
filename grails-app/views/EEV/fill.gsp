@@ -55,10 +55,10 @@
 								<td ng-hide="content.flattened"><span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span></td>
 								<td ng-hide="content.flattened">
 									<div class="btn-group pull-right" data-toggle="buttons">
-										<label class="btn btn-default"><input type="radio" name="answer{{$index}}" ng-model="content.answer.answer" value="3" ng-change="my()"/>:D</label>
-										<label class="btn btn-default"><input type="radio" name="answer{{$index}}" ng-model="content.answer.answer" value="2" ng-change="my()"/>:)</label>
-										<label class="btn btn-default"><input type="radio" name="answer{{$index}}" ng-model="content.answer.answer" value="1" ng-change="my()"/>:|</label>
-										<label class="btn btn-default"><input type="radio" name="answer{{$index}}" ng-model="content.answer.answer" value="0" ng-change="my()"/>:(</label>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{active:content.answer.answer === 3}" ng-click="content.answer.answer = 3">:D</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{active:content.answer.answer === 2}" ng-click="content.answer.answer = 2">:)</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{active:content.answer.answer === 1}" ng-click="content.answer.answer = 1">:|</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{active:content.answer.answer === 0}" ng-click="content.answer.answer = 0">:(</button>
 										<input type="text" ng-model="content.answer.answer"/>
 									</div>
 								</td>

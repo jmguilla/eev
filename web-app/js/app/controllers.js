@@ -2,12 +2,7 @@
 /* Controllers */
 app.controller('EEVFillCtrl', function($scope, EEV) {
 	$scope.alerts = [];
-  $scope.radioModel = 'Middle';
 	$scope.init = function(eevId, action) {
-	  $scope.radioModel = 'Middle';
-		$scope.my = function(){
-			alert();
-		}
 		$scope.eevId = eevId;
 		$scope.action = action;
 		if (action.toUpperCase() == "ANSWER") {
