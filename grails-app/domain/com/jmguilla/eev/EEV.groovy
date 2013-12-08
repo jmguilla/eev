@@ -6,9 +6,9 @@ class EEV {
   User interviewer, interviewee
   Boolean template = Boolean.TRUE
   
-  static hasMany = [groups: EEVRowsGroup]
+  static hasMany = [contents: Content]
 
   static constraints = {
-    groups(nullable: true)
+    contents(nullable: true)
   }
 }

@@ -6,6 +6,7 @@
 		<title>Repondre a un EEV</title>
 		<r:require module="angular_app"/>
 		<r:require module="bootstrap"/>
+		<g:createLinkTo dir="css" file="main.css" />
 	</head>
 	<body>
 		<div class="col-xs-12" ng-app="eev" ng-controller="EEVFillCtrl" ng-init="init(${params.id}, '${params.action}')">
@@ -39,17 +40,18 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<div ng-repeat="group in eev.groups" class="panel panel-primary">
+					<div ng-repeat="group in eev.contents | orderBy:'rank'" class="panel panel-primary">
 					<div class="panel-heading">{{group.title}}</div>
 					<div class="panel-body">
 						<table class="table table-hover">
 							<tr><td></td><td>:D</td><td>:)</td><td>:|</td><td>:(</td></tr>
-							<tr ng-repeat="row in group.rows|orderBy:'rank'">
-								<td>{{row.question.question}}</td>
-								<td><input type="radio" ng-model="row.answer.answer" value="0"/></td>
-								<td><input type="radio" ng-model="row.answer.answer" value="1"/></td>
-								<td><input type="radio" ng-model="row.answer.answer" value="2"/></td>
-								<td><input type="radio" ng-model="row.answer.answer" value="3"/></td>
+							<tr ng-repeat="content in group.contents|orderBy:'rank'|flatten">
+								<td ng-show="content.flattened" colspan="5"><span ng-bind-html="content.title" ></span></td>
+								<td ng-hide="content.flattened"><span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span></td>
+								<td ng-hide="content.flattened"><input type="radio" ng-model="content.answer.answer" value="0"/></td>
+								<td ng-hide="content.flattened"><input type="radio" ng-model="content.answer.answer" value="1"/></td>
+								<td ng-hide="content.flattened"><input type="radio" ng-model="content.answer.answer" value="2"/></td>
+								<td ng-hide="content.flattened"><input type="radio" ng-model="content.answer.answer" value="3"/></td>
 							</tr>
 						</table>
 					</div>

@@ -28,6 +28,10 @@ a.navbar-brand {
 
 .top-buffer { padding-top:10px; }
 .bottom-buffer { padding-bottom:10px; }
-
 .caption {text-align:center;}
-
+.margin{
+	margin-left: 20px;
+}
+.margin:before {
+  content: "\2023\00A0";
+}

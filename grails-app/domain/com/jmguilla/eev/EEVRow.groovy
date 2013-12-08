@@ -1,13 +1,9 @@
 package com.jmguilla.eev
 
-class EEVRow {
+class EEVRow extends Content{
 
-  Integer rank
   Question question
   Answer answer
 
-  static belongsTo = [group: EEVRowsGroup]
-  
-  static constraints = {
-  }
+  static constraints = { importFrom Content }
 }
