@@ -1,14 +1,11 @@
 package com.jmguilla.eev
 
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
 import grails.transaction.Transactional
 
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-@Transactional(readOnly = true)
 class EEVController {
 
   static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -84,6 +81,7 @@ class EEVController {
           eev = eev.save(failOnError: true, flush: true)
           result['model'] = ['eev': eev]
         }catch(Throwable t){
+          log.error('Cannot answer the eev', t)
           response.status = 500
           result['type'] = 'danger'
           result['content'] = t.toString()
@@ -177,26 +175,10 @@ class EEVController {
   protected void bindEEV(EEV eev, JSONObject input){
     //TODO switch to services
     bindData(eev, input)
-    for(group in input.groups){
+    for(group in input.contents){
       def newGroup = (eev.id?EEVRowsGroup.get(group.id): new EEVRowsGroup(group))
-      bindData(newGroup, group)
-      newGroup = newGroup.save(failOnError: true)
-      for(row in group.rows){
-        def newRow = (eev.id?EEVRow.get(row.id):new EEVRow(row))
-        bindData(newRow, row)
-        newRow.group = newGroup
-        def newQuestionClass = grailsApplication.getDomainClass(row.question.class).clazz
-        def newQuestion = (eev.id?newQuestionClass.get(row.question.id): newQuestionClass.newInstance())
-        bindData(newQuestion, row.question)
-        def newAnswerClass = grailsApplication.getDomainClass(row.answer.class).clazz
-        def newAnswer = (eev.id?newAnswerClass.get(row.answer.id): newAnswerClass.newInstance())
-        bindData(newAnswer, row.answer)
-        newRow.question = newQuestion.save(failOnError: true)
-        newRow.answer = newAnswer.save(failOnError: true)
-        newGroup.addToRows(newRow.save(failOnError: true))
-      }
-      newGroup = newGroup.save(failOnError: true)
-      eev.addToGroups(newGroup)
+      bindGroup(eev.id, newGroup, group)
+      eev.addToContents(newGroup.save(failOnError: true))
     }
     def interviewee = User.findByEmailIlike(input.interviewee.email)
     if(!interviewee){
@@ -212,5 +194,33 @@ class EEVController {
       interviewer = interviewer.save(failOnError: true)
     }
     eev.interviewer = interviewer
+  }
+  
+  def bindGroup(update, newGroup, group){
+    bindData(newGroup, group)
+    newGroup = newGroup.save(failOnError: true)
+    for(content in group.contents){
+      def newContent = null
+      if(content.contents){
+        newContent = (update?EEVRowsGroup.get(group.id): new EEVRowsGroup(content))
+        bindGroup(update, newContent, content)
+      }else{
+        newContent = (update?EEVRow.get(content.id):new EEVRow(content))
+        bindRow(update, newContent, content)
+      }
+      newGroup.addToContents(newContent.save(failOnError: true))
+    }
+  }
+  
+  def bindRow(update, newRow, content){
+    bindData(newRow, content)
+    def newQuestionClass = grailsApplication.getDomainClass(content.question.class).clazz
+    def newQuestion = (update?newQuestionClass.get(content.question.id): newQuestionClass.newInstance())
+    bindData(newQuestion, content.question)
+    def newAnswerClass = grailsApplication.getDomainClass(content.answer.class).clazz
+    def newAnswer = (update?newAnswerClass.get(content.answer.id): newAnswerClass.newInstance())
+    bindData(newAnswer, content.answer)
+    newRow.question = newQuestion.save(failOnError: true)
+    newRow.answer = newAnswer.save(failOnError: true)
   }
 }

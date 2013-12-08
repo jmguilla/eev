@@ -6,10 +6,16 @@
 		<title>Repondre a un EEV</title>
 		<r:require module="angular_app"/>
 		<r:require module="bootstrap"/>
-		<g:createLinkTo dir="css" file="main.css" />
 	</head>
 	<body>
 		<div class="col-xs-12" ng-app="eev" ng-controller="EEVFillCtrl" ng-init="init(${params.id}, '${params.action}')">
+			<pre>{{radioModel}}</pre>
+			<input type="text" ng-model="radioModel"/>
+		    <div class="btn-group">
+		        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Left'">Left</button>
+		        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'">Middle</button>
+		        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Right'">Right</button>
+		    </div>
 			<div class="row">
 				<div class="col-xs-12">
 					<div ng-repeat="alert in alerts" class="alert alert-{{alert.type}} alert-dismissable">
@@ -44,14 +50,18 @@
 					<div class="panel-heading">{{group.title}}</div>
 					<div class="panel-body">
 						<table class="table table-hover">
-							<tr><td></td><td>:D</td><td>:)</td><td>:|</td><td>:(</td></tr>
 							<tr ng-repeat="content in group.contents|orderBy:'rank'|flatten">
-								<td ng-show="content.flattened" colspan="5"><span ng-bind-html="content.title" ></span></td>
+								<td ng-show="content.flattened" colspan="2"><span ng-bind-html="content.title" ></span></td>
 								<td ng-hide="content.flattened"><span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span></td>
-								<td ng-hide="content.flattened"><input type="radio" ng-model="content.answer.answer" value="0"/></td>
-								<td ng-hide="content.flattened"><input type="radio" ng-model="content.answer.answer" value="1"/></td>
-								<td ng-hide="content.flattened"><input type="radio" ng-model="content.answer.answer" value="2"/></td>
-								<td ng-hide="content.flattened"><input type="radio" ng-model="content.answer.answer" value="3"/></td>
+								<td ng-hide="content.flattened">
+									<div class="btn-group pull-right" data-toggle="buttons">
+										<label class="btn btn-default"><input type="radio" name="answer{{$index}}" ng-model="content.answer.answer" value="3" ng-change="my()"/>:D</label>
+										<label class="btn btn-default"><input type="radio" name="answer{{$index}}" ng-model="content.answer.answer" value="2" ng-change="my()"/>:)</label>
+										<label class="btn btn-default"><input type="radio" name="answer{{$index}}" ng-model="content.answer.answer" value="1" ng-change="my()"/>:|</label>
+										<label class="btn btn-default"><input type="radio" name="answer{{$index}}" ng-model="content.answer.answer" value="0" ng-change="my()"/>:(</label>
+										<input type="text" ng-model="content.answer.answer"/>
+									</div>
+								</td>
 							</tr>
 						</table>
 					</div>
