@@ -5,8 +5,8 @@ package com.jmguilla.eev
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(EEVController)
-@Mock(EEV)
+@TestFor(EEVQuestionsController)
+@Mock(EEVQuestions)
 class EEVControllerSpec extends Specification {
 
     def populateValidParams(params) {
@@ -36,7 +36,7 @@ class EEVControllerSpec extends Specification {
     void "Test the save action correctly persists an instance"() {
 
         when:"The save action is executed with an invalid instance"
-            def EEV = new EEV()
+            def EEV = new EEVQuestions()
             EEV.validate()
             controller.save(EEV)
 
@@ -47,7 +47,7 @@ class EEVControllerSpec extends Specification {
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            EEV = new EEV(params)
+            EEV = new EEVQuestions(params)
 
             controller.save(EEV)
 
@@ -66,7 +66,7 @@ class EEVControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def EEV = new EEV(params)
+            def EEV = new EEVQuestions(params)
             controller.show(EEV)
 
         then:"A model is populated containing the domain instance"
@@ -82,7 +82,7 @@ class EEVControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def EEV = new EEV(params)
+            def EEV = new EEVQuestions(params)
             controller.edit(EEV)
 
         then:"A model is populated containing the domain instance"
@@ -100,7 +100,7 @@ class EEVControllerSpec extends Specification {
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def EEV = new EEV()
+            def EEV = new EEVQuestions()
             EEV.validate()
             controller.update(EEV)
 
@@ -111,7 +111,7 @@ class EEVControllerSpec extends Specification {
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            EEV = new EEV(params).save(flush: true)
+            EEV = new EEVQuestions(params).save(flush: true)
             controller.update(EEV)
 
         then:"A redirect is issues to the show action"
@@ -130,7 +130,7 @@ class EEVControllerSpec extends Specification {
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def EEV = new EEV(params).save(flush: true)
+            def EEV = new EEVQuestions(params).save(flush: true)
 
         then:"It exists"
             EEV.count() == 1

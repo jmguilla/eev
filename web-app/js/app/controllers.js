@@ -1,12 +1,13 @@
 'use strict';
 /* Controllers */
-app.controller('EEVFillCtrl', function($scope, EEV) {
+app.controller('EEVFillCtrl', function($scope, EEVQuestions, EEVAnswers) {
+	$scope.answers = {};
 	$scope.alerts = [];
 	$scope.init = function(eevId, action) {
 		$scope.eevId = eevId;
 		$scope.action = action;
 		if (action.toUpperCase() == "ANSWER") {
-			EEV.getTemplate({
+			EEVQuestions.get({
 				eevId : eevId
 			}, function(response, headers) {
 				$scope.eev = response;
@@ -14,25 +15,23 @@ app.controller('EEVFillCtrl', function($scope, EEV) {
 				$scope.alerts.push(httpResponse.data)
 			});
 		} else {
-			EEV.get({
-				eevId : eevId
-			}, function(response, headers) {
-				$scope.eev = response;
-			}, function(httpResponse) {
-				$scope.alerts.push(httpResponse.data)
-			});
+			alert('Not implemented');
 		}
 	};
 	$scope.fill = function() {
-		EEV.save({
-			eevId : $scope.eevId,
-			actionId: $scope.action
-		}, $scope.eev, function(content, headers) {
+		EEVAnswers.answer({}, {
+			interviewer : $scope.interviewer,
+			interviewee : $scope.interviewee,
+			answers : $scope.answers
+		}, function(content, headers) {
 			$scope.alerts.push(content);
 			$scope.eev = content.model.eev;
 		}, function(httpResponse) {
-			$scope.alerts.push(httpResponse.data);
-			$scope.eev = httpResponse.data.model.eev;
+			if (httpResponse.data.type != undefined) {
+				$scope.alerts.push(httpResponse.data);
+			}else{
+				$scope.alerts.push({type: 'danger', content: 'Un problème inconnu s\'est produit'});
+			}
 		})
 	};
 });

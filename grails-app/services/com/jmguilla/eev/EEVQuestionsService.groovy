@@ -4,7 +4,7 @@ import grails.transaction.Transactional
 
 import org.springframework.transaction.annotation.Propagation
 
-class EEVService {
+class EEVQuestionsService {
 
   @Transactional(propagation = Propagation.REQUIRES_NEW)
   def serviceMethod() {

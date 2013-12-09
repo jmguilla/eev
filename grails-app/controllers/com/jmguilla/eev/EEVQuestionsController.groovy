@@ -6,39 +6,17 @@ import grails.transaction.Transactional
 
 import org.codehaus.groovy.grails.web.json.JSONObject
 
-class EEVController {
+class EEVQuestionsController {
 
   static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
-  def getTemplate(){
-    if(!request.method.equalsIgnoreCase('get')){
-      response.sendError(303)
-    }
-    def eev = EEV.get(params.id)
-    if(!eev){
-      response.sendError(404)
-    }
-    if(!eev.template){
-      response.sendError(400)
-    }
-    withFormat{
-      json{
-        JSON.use('deep'){ render (eev as JSON) }
-      }
-      '*'{ response.sendError(305) }
-    }
-  }
 
   def get(){
     if(!request.method.equalsIgnoreCase('get')){
       response.sendError(303)
     }
-    def eev = EEV.get(params.id)
+    def eev = EEVQuestions.get(params.id)
     if(!eev){
       response.sendError(404)
-    }
-    if(eev.template){
-      response.sendError(400)
     }
     withFormat{
       json{
@@ -49,19 +27,19 @@ class EEVController {
   }
 
   def answer(){
-    def eev = new EEV(template: false).save(failOnError: true)
+    def eev = new EEVQuestions(template: false).save(failOnError: true)
     fillImpl(request, response, params, eev, false)
   }
 
   def edit(){
-    def eev = EEV.get(params.id)
+    def eev = EEVQuestions.get(params.id)
     if(!eev || eev.template){
       response.sendError(404)
     }
     fillImpl(request, response, params, eev, true)
   }
 
-  def protected fillImpl(request, response, params, EEV eev, boolean update){
+  def protected fillImpl(request, response, params, EEVQuestions eev, boolean update){
     withFormat{
       html{
         if(!params.id){
@@ -94,7 +72,7 @@ class EEVController {
   }
 
   def show(){
-    def eev = EEV.get(params.id)
+    def eev = EEVQuestions.get(params.id)
     if(!eev){
       response.sendError(404)
     }
@@ -103,15 +81,15 @@ class EEVController {
 
   def index(Integer max) {
     params.max = Math.min(max ?: 10, 100)
-    respond EEV.list(params), model:[EEVInstanceCount: EEV.count()]
+    respond EEVQuestions.list(params), model:[EEVInstanceCount: EEVQuestions.count()]
   }
 
   def create() {
-    respond new EEV(params)
+    respond new EEVQuestions(params)
   }
 
   @Transactional
-  def update(EEV EEVInstance) {
+  def update(EEVQuestions EEVInstance) {
     if (EEVInstance == null) {
       notFound()
       return
@@ -139,7 +117,7 @@ class EEVController {
   }
 
   @Transactional
-  def delete(EEV EEVInstance) {
+  def delete(EEVQuestions EEVInstance) {
 
     if (EEVInstance == null) {
       notFound()
@@ -173,7 +151,7 @@ class EEVController {
     }
   }
 
-  protected void bindEEV(EEV eev, JSONObject input, boolean update){
+  protected void bindEEV(EEVQuestions eev, JSONObject input, boolean update){
     //TODO switch to services
     bindData(eev, input)
     for(group in input.contents){

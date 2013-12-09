@@ -1,5 +1,5 @@
 
-<%@ page import="com.jmguilla.eev.EEV" %>
+<%@ page import="com.jmguilla.eev.EEVQuestions" %>
 <!DOCTYPE html>
 <html>
 	<head>

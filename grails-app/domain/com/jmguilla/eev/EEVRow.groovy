@@ -2,13 +2,7 @@ package com.jmguilla.eev
 
 class EEVRow extends Content{
 
-  Question question
-  Answer answer
-  
-  static mapping = {
-    question cascade: 'none'
-    answer cascade: 'none'
-  }
+  def Question question
 
   static constraints = { importFrom Content }
 }

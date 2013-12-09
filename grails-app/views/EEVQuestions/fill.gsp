@@ -1,4 +1,4 @@
-<%@ page import="com.jmguilla.eev.EEV" %>
+<%@ page import="com.jmguilla.eev.EEVQuestions" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,9 +24,19 @@
 				<div class="col-xs-12">
 					<form role="form">
 					<div class="form-group">
+					  <label for="interviewer">Email Interviewer</label>
+					  <div>
+					  	<input ng-model="interviewer" type="text" class="form-control" id="interviewee" placeholder="Email interviewer">
+					  </div>
+					</div>
+					</form>
+				</div>
+				<div class="col-xs-12">
+					<form role="form">
+					<div class="form-group">
 					  <label for="interviewee">Email Interviewe</label>
 					  <div>
-					  	<input ng-model="eev.interviewee.email" type="text" class="form-control" id="interviewee" placeholder="Email interviewe">
+					  	<input ng-model="interviewee" type="text" class="form-control" id="interviewee" placeholder="Email interviewe">
 					  </div>
 					</div>
 					</form>
@@ -48,10 +58,10 @@
 								<td ng-hide="content.flattened"><span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span></td>
 								<td ng-hide="content.flattened">
 									<div class="btn-group pull-right">
-										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':content.answer.answer == '3'}" ng-click="content.answer.answer = '3'">:-D</button>
-										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':content.answer.answer == '2'}" ng-click="content.answer.answer = '2'">:-)</button>
-										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':content.answer.answer == '1'}" ng-click="content.answer.answer = '1'">:-|</button>
-										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':content.answer.answer == '0'}" ng-click="content.answer.answer = '0'">:-(</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '3'}" ng-click="answers[content.question.id] = '3'">:-D</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '2'}" ng-click="answers[content.question.id] = '2'">:-)</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '1'}" ng-click="answers[content.question.id] = '1'">:-|</button>
+										<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '0'}" ng-click="answers[content.question.id] = '0'">:-(</button>
 									</div>
 								</td>
 							</tr>

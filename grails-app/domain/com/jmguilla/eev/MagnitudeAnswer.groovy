@@ -10,6 +10,6 @@ class MagnitudeAnswer extends Answer{
   }
   
   static mapping = {
-    answer defaultValue: -1
+    answer defaultValue: new Integer(-1)
   }
 }
