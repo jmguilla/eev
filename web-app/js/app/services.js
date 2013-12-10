@@ -17,11 +17,21 @@ factory('EEVQuestions', function($resource){
 }).
 
 factory('EEVAnswers', function($resource){
-  return $resource('/eev/EEVAnswers/:actionId/:eevId.json', {actionId: '', eevId: '@id'}, {
+  return $resource('/eev/EEVAnswers/:actionId/:eevAnswersId.json', {actionId: '', eevId: '@id'}, {
   	answer:{
   		method: 'POST',
   		params:{
   			actionId: 'answer'
+  		},
+  		headers: {
+  			'Content-Type': 'application/json',
+  			'Accept': 'application/json'
+  		}
+  	},
+  	getEEV:{
+  		method: 'GET',
+  		params:{
+  			actionId: 'getEEV'
   		},
   		headers: {
   			'Content-Type': 'application/json',
