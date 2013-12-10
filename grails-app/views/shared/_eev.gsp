@@ -25,7 +25,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		<button ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
+		<button ng-disabled="eevDisabled" ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
 	</div>
 </div>
 <div class="row">
@@ -53,6 +53,6 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		<button ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
+		<button ng-disabled="eevDisabled" ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
 	</div>
 </div>

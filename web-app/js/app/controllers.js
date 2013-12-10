@@ -3,6 +3,7 @@
 
 app.controller('EEVAnswersEditCtrl', function($scope, EEVAnswers) {
 	$scope.alerts = [];
+	$scope.eevDisabled = true;
 	$scope.init = function(eevAnswersId){
 		$scope.eevAnswersId = eevAnswersId;
 		var data = EEVAnswers.getEEV({eevAnswersId: $scope.eevAnswersId},
