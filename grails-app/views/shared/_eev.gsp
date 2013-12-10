@@ -33,21 +33,46 @@
 		<div ng-repeat="group in eev.contents | orderBy:'rank'" class="panel panel-primary">
 		<div class="panel-heading">{{group.title}}</div>
 		<div class="panel-body">
-			<table class="table table-hover">
-				<tr ng-repeat="content in group.contents|orderBy:'rank'|flatten">
-					<td ng-show="content.flattened" colspan="2"><span ng-bind-html="content.title" ></span></td>
-					<td ng-hide="content.flattened"><span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span></td>
-					<td ng-hide="content.flattened">
-						<div class="btn-group pull-right">
-							<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '3'}" ng-click="answers[content.question.id] = '3'">:-D</button>
-							<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '2'}" ng-click="answers[content.question.id] = '2'">:-)</button>
-							<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '1'}" ng-click="answers[content.question.id] = '1'">:-|</button>
-							<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '0'}" ng-click="answers[content.question.id] = '0'">:-(</button>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
+			<div class="list-group col-xs-12 col-md-4">
+			 <a class="row list-group-item" ng-repeat="content in group.contents|orderBy:'rank'|flatten">
+			 	<div class="col-xs-12" ng-show="content.flattened"><span ng-bind-html="content.title" ></span></div>
+				<div class="col-xs-12 col-sm-6" ng-hide="content.flattened">
+					<span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span>
+				</div>
+				<div ng-hide="content.flattened" class="col-xs-12 col-sm-6">
+					<div class="btn-group pull-right">
+						<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '3'}" ng-click="answers[content.question.id] = '3'">:-D</button>
+						<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '2'}" ng-click="answers[content.question.id] = '2'">:-)</button>
+						<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '1'}" ng-click="answers[content.question.id] = '1'">:-|</button>
+						<button class="btn btn-default" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '0'}" ng-click="answers[content.question.id] = '0'">:-(</button>
+					</div>
+				</div>
+			 </a>
+			 </div>
+		 	<div class="col-xs-12 col-md-4 pull-right">
+		 		<div class="panel panel-default">
+			 		<div class="panel-heading panel-title">Points forts</div>
+			 		<div class="panel-body">
+				 		<form role="form" style="height: 100%;">
+				 			<div class="form-group">
+					 			<textarea class="form-control"></textarea>
+				 			</div>
+				 		</form>
+			 		</div>
+		 		</div>
+			</div>
+		 	<div class="col-xs-12 col-md-4 pull-right">
+		 		<div class="panel panel-default">
+			 		<div class="panel-heading panel-title">Points faibles</div>
+			 		<div class="panel-body">
+				 		<form role="form" style="height: 100%;">
+				 			<div class="form-group">
+					 			<textarea class="form-control"></textarea>
+				 			</div>
+				 		</form>
+			 		</div>
+		 		</div>
+			</div>
 		</div>
 	</div>
 </div>
