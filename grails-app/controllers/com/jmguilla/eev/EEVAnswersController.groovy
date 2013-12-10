@@ -26,7 +26,9 @@ class EEVAnswersController {
           eev: eevAnswers,
           answer: Integer.parseInt(value)).save(failOnError: true)
         }
-        respond([type: "success", content: "EEV repondu avec succes"])
+        JSON.use('deep'){
+          respond([type: "success", content: "EEV repondu avec succes", model:[eev: eevQuestions]])
+        }
       }
       '*'{
         response.status = 400
@@ -69,7 +71,9 @@ class EEVAnswersController {
           return
         }
         JSON.use('deep'){
-          respond([eev: eevAnswers.eevQuestions, answers: eevAnswers])
+          def result = []
+          eevAnswers.answers.each{result[it.question.id.intValue()] = it.answer}
+          respond([eev: eevAnswers.eevQuestions, interviewee: eevAnswers.interviewee, interviewer: eevAnswers.interviewer, answers: result])
         }
       }
       '*'{
