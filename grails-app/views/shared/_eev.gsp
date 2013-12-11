@@ -31,7 +31,37 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div ng-repeat="group in eev.contents | orderBy:'rank'" class="panel panel-primary">
-		<div class="panel-heading">{{group.title}}</div>
+		<div class="panel-heading">
+			<div class="col-xs-9 col-md-12">{{group.title}}</div>
+			<div class="btn-group hidden-md hidden-lg pull-right col-xs-3">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			  <span class="glyphicon glyphicon-list"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><a href="#" data-toggle="modal" data-target="#pointsForts">Points Forts</a></li>
+			    <li><a href="#" data-toggle="modal" data-target="#pointsForts">Points Faibles</a></li>
+			  </ul>
+			  
+			  <div class="modal fade" id="pointsForts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				      </div>
+				      <div class="modal-body">
+				        ...
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+			</div>
+      		<div class="clearfix"></div>
+		</div>
 		<div class="panel-body">
 			<div class="list-group col-xs-12 col-md-4">
 			 <a class="row list-group-item" ng-repeat="content in group.contents|orderBy:'rank'|flatten">
@@ -49,7 +79,7 @@
 				</div>
 			 </a>
 			 </div>
-		 	<div class="col-xs-12 col-md-4 pull-right">
+		 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
 		 		<div class="panel panel-default">
 			 		<div class="panel-heading panel-title">Points forts</div>
 			 		<div class="panel-body">
@@ -61,7 +91,7 @@
 			 		</div>
 		 		</div>
 			</div>
-		 	<div class="col-xs-12 col-md-4 pull-right">
+		 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
 		 		<div class="panel panel-default">
 			 		<div class="panel-heading panel-title">Points faibles</div>
 			 		<div class="panel-body">
