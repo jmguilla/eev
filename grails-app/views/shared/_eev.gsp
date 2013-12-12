@@ -36,11 +36,11 @@
 			  <span class="glyphicon glyphicon-list"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
-			    <li><a href="#" data-toggle="modal" data-target="#pointsForts">Points Forts</a></li>
-			    <li><a href="#" data-toggle="modal" data-target="#pointsFaibles">Points Faibles</a></li>
+			    <li><a href="#" data-toggle="modal" data-target="#pointsForts{{$index}}">Points Forts</a></li>
+			    <li><a href="#" data-toggle="modal" data-target="#pointsFaibles{{$index}}">Points Faibles</a></li>
 			  </ul>
 			  
-			  <div class="modal fade" id="pointsForts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal fade" id="pointsForts{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -57,7 +57,7 @@
 				  </div><!-- /.modal-dialog -->
 				</div><!-- /.modal -->
 				
-			  	<div class="modal fade" id="pointsFaibles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  	<div class="modal fade" id="pointsFaibles{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
 				      <div class="modal-header">
