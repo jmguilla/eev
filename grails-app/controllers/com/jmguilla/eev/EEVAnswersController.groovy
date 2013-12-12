@@ -60,13 +60,13 @@ class EEVAnswersController {
   }
 
   @Transactional
-  def edit(){
+  def show(){
     withFormat{
       html{
         if(!params.id){
           response.sendError(404)
         }
-        render view: 'edit', model: [params: params]
+        render view: 'show', model: [params: params]
       }
       json{
       }
