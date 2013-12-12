@@ -3,7 +3,6 @@ package com.jmguilla.eev
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
-import groovy.lang.GroovyShell
 
 
 class EEVAnswersController {
@@ -15,10 +14,11 @@ class EEVAnswersController {
   @Secured(['ROLE_ADMIN'])
   def list(){
     withFormat{
-      html{}
+      html{
+      }
       json{
         def result = EEVAnswers.executeQuery('select a from EEVAnswers a inner join fetch a.eevQuestions as eevQuestions order by eevQuestions.id, a.creationDate')
-        JSON.use('answersList'){ render(result as JSON)}
+        JSON.use('answersList'){ render(result as JSON) }
       }
     }
   }
@@ -51,8 +51,8 @@ class EEVAnswersController {
             }
             def answer = null
             if(value){
-              value = value.replace("'", "\\'")
-              answer = new GroovyShell(this.class.getClassLoader()).evaluate("return new ${question.answerType}(answer: '${value}')")
+              answer = Class.forName(question.answerType).newInstance()
+              answer.setAnswer value
               answer.question = question
               answer.eev = eevAnswers
               answer = answer.save(failOnError: true)
