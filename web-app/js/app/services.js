@@ -37,6 +37,17 @@ factory('EEVAnswers', function($resource){
   			'Content-Type': 'application/json',
   			'Accept': 'application/json'
   		}
+  	},
+  	list:{
+  		method: 'GET',
+  		params:{
+  			actionId: 'list'
+  		},
+  		headers: {
+  			'Content-Type': 'application/json',
+  			'Accept': 'application/json'
+  		},
+  		isArray: true
   	}
   });
 });

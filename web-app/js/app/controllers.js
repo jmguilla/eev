@@ -1,6 +1,19 @@
 'use strict';
 /* Controllers */
-
+app.controller('EEVAnswersListCtrl', function($scope, EEVAnswers) {
+	$scope.alerts = [];
+	var data = EEVAnswers.list({},
+			function(data, headers){
+				$scope.eevs = data;
+			},
+			function(httpResponse){
+				if (httpResponse.data.type != undefined) {
+					$scope.alerts.push(httpResponse.data);
+				}else{
+					$scope.alerts.push({type: 'danger', content: 'Un problème inconnu s\'est produit'});
+				}
+			});
+});
 app.controller('EEVAnswersEditCtrl', function($scope, EEVAnswers) {
 	$scope.alerts = [];
 	$scope.eevDisabled = true;

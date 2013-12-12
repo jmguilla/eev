@@ -3,12 +3,25 @@ package com.jmguilla.eev
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
+import groovy.lang.GroovyShell
 
 
 class EEVAnswersController {
 
   def EEVQuestionsService
-  def EEVAnswersService
+  def EEVAnswersServicelean
+
+  @Transactional(readOnly = true)
+  @Secured(['ROLE_ADMIN'])
+  def list(){
+    withFormat{
+      html{}
+      json{
+        def result = EEVAnswers.executeQuery('select a from EEVAnswers a inner join fetch a.eevQuestions as eevQuestions order by eevQuestions.id, a.creationDate')
+        JSON.use('answersList'){ render(result as JSON)}
+      }
+    }
+  }
 
   @Transactional
   def answer() {

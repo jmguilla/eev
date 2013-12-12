@@ -1,7 +1,10 @@
 package com.jmguilla.eev
 
+import grails.plugins.jsonapis.JsonApi
+
 class EEVQuestions {
 
+  @JsonApi('answersList')
   String title
 
   static hasMany = [contents: Content]
