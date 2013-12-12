@@ -12,7 +12,7 @@
 		<div class="col-xs-12" ng-app="eev" ng-controller="EEVAnswersListCtrl">
 			<g:render template="/shared/alerts"/>
 			<ul>
-				<li ng-repeat="eev in eevs">{{eev.eevQuestions.title}} - {{eev.creationDate}}</li>
+				<li ng-repeat="eev in eevs"><a href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}">{{eev.eevQuestions.title}} - {{eev.creationDate}}</a></li>
 			</ul>
 		</div>
 	</body>
