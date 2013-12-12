@@ -5,6 +5,6 @@ class Content {
   Integer rank
 
   static constraints = {
-    rank(nullable: false, min: 1)
+    rank(nullable: false, min: -1)
   }
 }

@@ -26,57 +26,11 @@ class EEVQuestionsController {
     }
   }
 
-  def answer(){
-    def eev = new EEVQuestions(template: false).save(failOnError: true)
-    fillImpl(request, response, params, eev, false)
-  }
-
-  def edit(){
-    def eev = EEVQuestions.get(params.id)
-    if(!eev || eev.template){
-      response.sendError(404)
-    }
-    fillImpl(request, response, params, eev, true)
-  }
-
-  def protected fillImpl(request, response, params, EEVQuestions eev, boolean update){
-    withFormat{
-      html{
-        if(!params.id){
-          response.sendError(404)
-        }
-        render view: 'fill', model: [params: params]
-      }
-      json{
-        def result = [:]
-        if(!request.post){
-          response.sendError(303)
-        }
-        try{
-          bindEEV(eev, request.JSON, update)
-          eev.template = false
-          result['type'] = 'success'
-          result['content'] ='<strong>Nouvel EEV cree</strong>'
-          result['model'] = ['eev': eev]
-          eev = eev.save(failOnError: true, flush: true)
-        }catch(Throwable t){
-          log.error('Cannot answer the eev', t)
-          response.status = 500
-          result['type'] = 'danger'
-          result['content'] = t.toString()
-        }
-        JSON.use('deep'){ render(result as JSON) }
-      }
-      '*'{ response.sendError(305) }
-    }
-  }
-
   def show(){
-    def eev = EEVQuestions.get(params.id)
-    if(!eev){
+    if(!params.id){
       response.sendError(404)
     }
-    render view: 'show', model: [eevInstance: eev]
+    respond new Object(), [view: 'fill', model: [params: params, eevInstance: [id: params.id]]]
   }
 
   def index(Integer max) {
@@ -174,7 +128,7 @@ class EEVQuestionsController {
     }
     eev.interviewer = interviewer
   }
-  
+
   def bindGroup(boolean update, EEVRowsGroup newGroup, JSONObject group){
     bindData(newGroup, group)
     for(content in group.contents){
@@ -189,7 +143,7 @@ class EEVQuestionsController {
       newGroup.addToContents(newContent.save(failOnError: true))
     }
   }
-  
+
   def bindRow(boolean update, EEVRow newRow, JSONObject content){
     def newQuestionClass = grailsApplication.getDomainClass(content.question.class).clazz
     def newQuestion = (update?newQuestionClass.get(content.question.id): newQuestionClass.newInstance())

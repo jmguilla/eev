@@ -8,8 +8,12 @@ class MagnitudeAnswer extends Answer{
     importFrom Answer
     answer(nullable: false, min: -1, max:3)
   }
-  
+
   static mapping = {
     answer defaultValue: new Integer(-1)
+  }
+
+  def MagnitudeAnswer(String value){
+    this.answer = Integer.parseInt(value)
   }
 }

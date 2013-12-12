@@ -3,6 +3,7 @@ package com.jmguilla.eev
 import grails.converters.JSON
 import grails.transaction.Transactional
 
+
 class EEVAnswersController {
 
   def EEVQuestionsService
@@ -12,22 +13,43 @@ class EEVAnswersController {
   def answer() {
     withFormat{
       json{
-        def eevQuestions = EEVQuestions.get(request.JSON.eevId)
-        if(!eevQuestions){
-          respond([type: "danger", content: "Aucun EEV ne correspond a l'identifiant: ${request.JSON.eevId}"])
-          return
-        }
-        def eevAnswers = new EEVAnswers(eevQuestions: eevQuestions, interviewer: (request.JSON.interviewer?request.JSON.interviewer: null), interviewee: (request.JSON.interviewee?request.JSON.interviewee: null)).save(failOnError: true)
-        def answers = request.JSON.answers
-        def questions = Question.findAll("from Question as q where q.id in (:ids)", [ids: answers.collect{k, v -> Long.parseLong(k)}])
-        answers.each{qid, value ->
-          def question = questions.find{q -> q.id == Long.parseLong(qid)}
-          def answer = new MagnitudeAnswer(question: question,
-          eev: eevAnswers,
-          answer: Integer.parseInt(value)).save(failOnError: true)
-        }
-        JSON.use('deep'){
-          respond([type: "success", content: "EEV repondu avec succes", model:[eev: eevQuestions]])
+        try{
+          def eevQuestions = EEVQuestions.get(request.JSON.eevId)
+          if(!eevQuestions){
+            respond([type: "danger", content: "Aucun EEV ne correspond a l'identifiant: ${request.JSON.eevId}"])
+            return
+          }
+          def eevAnswers = new EEVAnswers(eevQuestions: eevQuestions)
+          bindData(eevAnswers, request.JSON, [exclude: [
+              'answers',
+              'class',
+              'id',
+              'version'
+            ]])
+          eevAnswers = eevAnswers.save(failOnError: true)
+          def answers = request.JSON.answers
+          def questions = Question.findAll("from Question as q where q.id in (:ids)", [ids: answers.collect{ k, v ->
+              Long.parseLong(k)
+            }])
+          answers.each{ qid, value ->
+            def question = questions.find{ q ->
+              q.id == Long.parseLong(qid)
+            }
+            def answer = null
+            if(value){
+              value = value.replace("'", "\\'")
+              answer = new GroovyShell(this.class.getClassLoader()).evaluate("return new ${question.answerType}(answer: '${value}')")
+              answer.question = question
+              answer.eev = eevAnswers
+              answer = answer.save(failOnError: true)
+            }
+          }
+          JSON.use('deep'){
+            respond([type: "success", content: "EEV repondu avec succes", model:[eev: eevQuestions]])
+          }
+        }catch(Throwable t){
+          log.error("Cannot create ${EEVAnswers}", t)
+          respond([type: 'danger', content: "Cannot perform the action: ${t}"])
         }
       }
       '*'{
@@ -71,8 +93,10 @@ class EEVAnswersController {
           return
         }
         JSON.use('deep'){
-          def result = []
-          eevAnswers.answers.each{result[it.question.id.intValue()] = it.answer}
+          def result = [:]
+          eevAnswers.answers.each{
+            result[it.question.id.intValue()] = it.answer
+          }
           respond([eev: eevAnswers.eevQuestions, interviewee: eevAnswers.interviewee, interviewer: eevAnswers.interviewer, answers: result])
         }
       }

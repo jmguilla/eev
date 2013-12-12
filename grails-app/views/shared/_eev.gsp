@@ -39,7 +39,7 @@
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
 			    <li><a href="#" data-toggle="modal" data-target="#pointsForts">Points Forts</a></li>
-			    <li><a href="#" data-toggle="modal" data-target="#pointsForts">Points Faibles</a></li>
+			    <li><a href="#" data-toggle="modal" data-target="#pointsFaibles">Points Faibles</a></li>
 			  </ul>
 			  
 			  <div class="modal fade" id="pointsForts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -47,14 +47,30 @@
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				        <h4 class="modal-title" id="myModalLabel">Points Forts</h4>
 				      </div>
 				      <div class="modal-body">
-				        ...
+			 			<textarea class="form-control" ng-model="answers[group.strengthsQuestion.question.id]"></textarea>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+			  	<div class="modal fade" id="pointsFaibles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				        <h4 class="modal-title" id="myModalLabel">Points Faibles</h4>
+				      </div>
+				      <div class="modal-body">
+			 			<textarea class="form-control" ng-model="answers[group.weaknessesQuestion.question.id]"></textarea>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				      </div>
 				    </div><!-- /.modal-content -->
 				  </div><!-- /.modal-dialog -->
@@ -85,7 +101,7 @@
 			 		<div class="panel-body">
 				 		<form role="form" style="height: 100%;">
 				 			<div class="form-group">
-					 			<textarea class="form-control"></textarea>
+					 			<textarea ng-model="answers[group.strengthsQuestion.question.id]" class="form-control"></textarea>
 				 			</div>
 				 		</form>
 			 		</div>
@@ -97,7 +113,7 @@
 			 		<div class="panel-body">
 				 		<form role="form" style="height: 100%;">
 				 			<div class="form-group">
-					 			<textarea class="form-control"></textarea>
+					 			<textarea ng-model="answers[group.weaknessesQuestion.question.id]" class="form-control"></textarea>
 				 			</div>
 				 		</form>
 			 		</div>
