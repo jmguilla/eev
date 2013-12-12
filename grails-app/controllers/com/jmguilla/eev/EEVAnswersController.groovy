@@ -1,6 +1,7 @@
 package com.jmguilla.eev
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
 
@@ -59,6 +60,7 @@ class EEVAnswersController {
     }
   }
 
+  @Secured(['ROLE_ADMIN'])
   @Transactional
   def show(){
     withFormat{
@@ -77,6 +79,7 @@ class EEVAnswersController {
     }
   }
 
+  @Secured(['ROLE_ADMIN'])
   @Transactional(readOnly = true)
   def getEEV(){
     withFormat{

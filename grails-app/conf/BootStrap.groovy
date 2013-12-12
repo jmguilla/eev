@@ -5,6 +5,9 @@ import com.jmguilla.eev.EEVRow
 import com.jmguilla.eev.EEVRowsGroup
 import com.jmguilla.eev.MagnitudeAnswer
 import com.jmguilla.eev.Question
+import com.jmguilla.eev.Role
+import com.jmguilla.eev.User
+import com.jmguilla.eev.UserRole
 
 class BootStrap {
 
@@ -12,6 +15,12 @@ class BootStrap {
     JSONObject.NULL.metaClass.asBoolean = {-> false}
 
     //initializing data
+    Role admin = new Role(authority: "ROLE_ADMIN").save(failOnError: true)
+    new Role(authority: "ROLE_OWNER").save(failOnError: true)
+    new Role(authority: "ROLE_USER").save(failOnError: true)
+    UserRole.create(new User(username: "jmguilla", password: "jmguilla", email: "guillauj@gmail.com").save(failOnError: true), admin)
+    UserRole.create(new User(username: "adifolco", password: "adifolco", email: "anthonydifolco@gmail.com").save(failOnError: true), admin)
+
     EEVQuestions eevTemplate = new EEVQuestions(title: 'Ecoute d\'entretien de vente')
     eevTemplate = eevTemplate.save(failOnError: true)
 

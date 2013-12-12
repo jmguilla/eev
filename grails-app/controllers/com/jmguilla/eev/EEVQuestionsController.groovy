@@ -4,12 +4,15 @@ import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
 import grails.transaction.Transactional
 
+import javax.annotation.security.PermitAll
+
 import org.codehaus.groovy.grails.web.json.JSONObject
 
 class EEVQuestionsController {
 
   static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+  @PermitAll
   def get(){
     if(!request.method.equalsIgnoreCase('get')){
       response.sendError(303)
@@ -26,6 +29,7 @@ class EEVQuestionsController {
     }
   }
 
+  @PermitAll
   def show(){
     if(!params.id){
       response.sendError(404)
