@@ -33,6 +33,10 @@ class EEVAnswersController {
             respond([type: "danger", content: "Aucun EEV ne correspond a l'identifiant: ${request.JSON.eevId}"])
             return
           }
+          if(!request.JSON.answers){
+            respond([type: "danger", content: "Vous n'avez répondu à aucune question..."])
+            return
+          }
           def eevAnswers = new EEVAnswers(eevQuestions: eevQuestions)
           bindData(eevAnswers, request.JSON, [exclude: [
               'answers',
