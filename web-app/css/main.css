@@ -29,6 +29,28 @@ a.navbar-brand {
   content: "\2023\00A0";
 }
 
+.face {
+	border: 0;
+	width: 30px;
+	height: 30px;
+	background: url("../images/faces.png") 0 0 no-repeat !important;
+}
+.face.active{
+	background: url("../images/faces.active.png") 0 0 no-repeat !important;
+}
+.face3, .face3.active{
+	background-position: -30px 0px !important;
+}
+.face2, .face2.active{
+	background-position: 0px 0px !important;
+}
+.face1, .face1.active{
+	background-position: -60px -60px !important;
+}
+.face0, .face0.active{
+	background-position: -60px -30px !important;
+}
+
 /* angularjs animation */
 .slide.ng-move,
 .slide.ng-enter,
