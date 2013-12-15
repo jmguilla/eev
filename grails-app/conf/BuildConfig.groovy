@@ -5,7 +5,9 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
+grails.war.exploded = true
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
+grails.project.war.exploded.dir = "../eev-cartridge/webapps/${appName}"
 
 grails.project.fork = [
   // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
@@ -47,10 +49,8 @@ grails.project.dependency.resolution = {
     //mavenRepo "http://repository.jboss.com/maven2/"
   }
 
-  dependencies {
-    // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-    // runtime 'mysql:mysql-connector-java:5.1.24'
-  }
+  dependencies { // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
+    runtime 'mysql:mysql-connector-java:5.1.24' }
 
   plugins {
     // plugins for the build system only

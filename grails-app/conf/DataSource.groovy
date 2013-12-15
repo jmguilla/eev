@@ -4,6 +4,13 @@ dataSource {
     username = "sa"
     password = ""
 }
+openShift{
+    pooled = true
+    driverClassName = "com.mysql.jdbc.Driver"
+    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+    username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME")
+    password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD")
+}
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
@@ -26,9 +33,9 @@ environments {
         }
     }
     production {
-        dataSource {
-            dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+        openShift {
+            dbCreate = "create-drop"
+            url = "jdbc:mysql://${System.getenv('OPENSHIFT_MYSQL_DB_HOST')}:${System.getenv('OPENSHIFT_MYSQL_DB_PORT')}/ecouteentretien?useUnicode=yes&characterEncoding=UTF-8"
             properties {
                maxActive = -1
                minEvictableIdleTimeMillis=1800000
