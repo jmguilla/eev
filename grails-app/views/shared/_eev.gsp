@@ -1,11 +1,16 @@
 <div ng-if="!!eev == true" class="row slide">
 	<div class="col-xs-12">
-		<button ng-disabled="eevDisabled" ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
-		<h3>{{eev.title}}</h3>
+		<button ng-disabled="eevSubmitting == true" ng-if="eevSubmitting == false" ng-click="fill()" type="button" class="btn btn-default slide">Repondre</button>
+		<div ng-if="eevSubmitting == true" class="progress progress-striped active slide">
+		  <div class="progress-bar"  role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+		    <span class="sr-only">Soumission en cours</span>
+		  </div>
+		</div>
 	</div>
 </div>
 <div ng-if="!!eev == true" class="row slide">
 	<div class="col-xs-12">
+		<h3>{{eev.title}}</h3>
 		<form role="form">
 		<div class="form-group">
 		  <label for="interviewer">Email Interviewer</label>
@@ -123,7 +128,7 @@
 </div>
 <div ng-if="!!eev == true" class="row">
 	<div class="col-xs-12">
-		<button ng-disabled="eevDisabled" ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
+		<button ng-disabled="eevSubmitting == true" ng-if="eevSubmitting == false" ng-click="fill()" type="button" class="btn btn-default slide">Repondre</button>
 	</div>
 </div>
 <div ng-if="!eev == true" class="row">

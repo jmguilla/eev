@@ -40,6 +40,7 @@ app.controller('EEVFillCtrl', function($scope, EEVQuestions, EEVAnswers) {
 	$scope.alerts = [];
 	$scope.answers = {};
 	$scope.init = function(eevId) {
+		$scope.eevSubmitting = false;
 		$scope.eevId = eevId;
 		EEVQuestions.get({
 			eevId : eevId
@@ -50,18 +51,21 @@ app.controller('EEVFillCtrl', function($scope, EEVQuestions, EEVAnswers) {
 		});
 	};
 	$scope.fill = function() {
+		$scope.eevSubmitting = true;
 		EEVAnswers.answer({}, {
 			eevId: $scope.eevId,
 			interviewer : $scope.interviewer,
 			interviewee : $scope.interviewee,
 			answers : $scope.answers
 		}, function(content, headers) {
+			$scope.eevSubmitting = false;
 			$scope.alerts.push(content);
 			$scope.eev = content.model.eev;
 			$scope.answers = {};
 			$scope.interviewer = undefined;
 			$scope.interviewee = undefined;
 		}, function(httpResponse) {
+			$scope.eevSubmitting = false;
 			if (httpResponse.data.type != undefined) {
 				$scope.alerts.push(httpResponse.data);
 			}else{
