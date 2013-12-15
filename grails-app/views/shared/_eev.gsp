@@ -1,10 +1,10 @@
-<div class="row">
+<div ng-if="!!eev == true" class="row slide">
 	<div class="col-xs-12">
 		<button ng-disabled="eevDisabled" ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
 		<h3>{{eev.title}}</h3>
 	</div>
 </div>
-<div class="row">
+<div ng-if="!!eev == true" class="row slide">
 	<div class="col-xs-12">
 		<form role="form">
 		<div class="form-group">
@@ -26,7 +26,7 @@
 		</form>
 	</div>
 </div>
-<div class="row">
+<div ng-if="!!eev == true" class="row slide">
 	<div class="col-xs-12">
 		<div ng-repeat="group in eev.contents | orderBy:'rank'" class="panel panel-primary">
 		<div class="panel-heading">
@@ -121,8 +121,18 @@
 	</div>
 </div>
 </div>
-<div class="row">
+<div ng-if="!!eev == true" class="row">
 	<div class="col-xs-12">
 		<button ng-disabled="eevDisabled" ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
+	</div>
+</div>
+<div ng-if="!eev == true" class="row">
+	<div class="col-xs-12">
+		<h1>Chargement</h1>
+		<div class="progress progress-striped active">
+		  <div class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+		    <span class="sr-only">Chargement</span>
+		  </div>
+		</div>
 	</div>
 </div>

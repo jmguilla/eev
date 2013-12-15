@@ -4,6 +4,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<title>Repondre a un EEV</title>
+		<link type="text/css" href="${createLinkTo(dir:'css',file:'main.css')}" />
 		<r:require module="angular_app"/>
 		<r:require module="bootstrap"/>
 	</head>
