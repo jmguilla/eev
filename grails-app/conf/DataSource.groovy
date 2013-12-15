@@ -34,8 +34,8 @@ environments {
       dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
       username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME")
       password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD")
-      dbCreate = "update"
       url = "jdbc:mysql://${System.getenv('OPENSHIFT_MYSQL_DB_HOST')}:${System.getenv('OPENSHIFT_MYSQL_DB_PORT')}/ecouteentretien?useUnicode=yes&characterEncoding=UTF-8"
+      //      dbCreate = "update"
       //            properties {
       //               maxActive = -1
       //               minEvictableIdleTimeMillis=1800000

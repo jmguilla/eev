@@ -157,3 +157,6 @@ grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_ADMIN > ROLE_OWNER
    ROLE_OWNER > ROLE_USER
 '''
+
+grails.plugin.databasemigration.updateOnStart = true
+grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]
