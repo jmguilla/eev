@@ -15,7 +15,7 @@
 		<div class="form-group">
 		  <label for="interviewer">Email Interviewer</label>
 		  <div>
-		  	<input ng-model="interviewer" type="text" class="form-control" id="interviewee" placeholder="Email interviewer">
+		  	<input ng-model="$parent.interviewer" type="text" class="form-control" id="interviewer" placeholder="Email interviewer" />
 		  </div>
 		</div>
 		</form>
@@ -25,7 +25,7 @@
 		<div class="form-group">
 		  <label for="interviewee">Email Interviewe</label>
 		  <div>
-		  	<input ng-model="interviewee" type="text" class="form-control" id="interviewee" placeholder="Email interviewe">
+		  	<input ng-model="$parent.interviewee" type="text" class="form-control" id="interviewee" placeholder="Email interviewe" />
 		  </div>
 		</div>
 		</form>

@@ -62,8 +62,8 @@ app.controller('EEVFillCtrl', function($scope, EEVQuestions, EEVAnswers) {
 			$scope.alerts.push(content);
 			$scope.eev = content.model.eev;
 			$scope.answers = {};
-			$scope.interviewer = undefined;
-			$scope.interviewee = undefined;
+			$scope.interviewer = '';
+			$scope.interviewee = '';
 		}, function(httpResponse) {
 			$scope.eevSubmitting = false;
 			if (httpResponse.data.type != undefined) {

@@ -4,7 +4,8 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<title>Modifier un EEV</title>
+		<title>EEV</title>
+		<link type="text/css" href="${createLinkTo(dir:'css',file:'main.css')}" />
 		<r:require module="angular_app"/>
 		<r:require module="bootstrap"/>
 	</head>
