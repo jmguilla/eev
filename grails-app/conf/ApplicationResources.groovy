@@ -20,10 +20,11 @@ modules = {
     resource url:'js/app/services.js'
     resource url:'js/app/app.js'
     resource url:'js/app/filters.js'
-    resource url:'js/app/controllers.js'
+    resource url:'js/app/controllers.js', bundle: 'bundle_angular_app_controllers_online'
+    resource url:'js/app/controllers_offline.js', bundle: 'bundle_angular_app_controllers_online'
     resource url:'js/app/config.js'
   }
-  
+
   //bootstrap and css
   bootstrap_switch {
     dependsOn 'bootstrap'
@@ -35,7 +36,5 @@ modules = {
     dependsOn 'angular'
     resource url: 'js/lib/bootstrap-ui-0.7/ui-bootstrap-tpls-0.7.0.js'
   }
-  application {
-    resource url:'js/application.js'
-  }
+  application { resource url:'js/application.js' }
 }

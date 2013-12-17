@@ -22,6 +22,7 @@ grails.mime.disable.accept.header.userAgents = [
 ]
 grails.mime.types = [
   all:           '*/*',
+  manifest:      'text/cache-manifest',
   atom:          'application/atom+xml',
   css:           'text/css',
   csv:           'text/csv',
@@ -152,6 +153,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
   '/**/js/**':                      ['permitAll'],
   '/**/css/**':                     ['permitAll'],
   '/**/images/**':                  ['permitAll'],
+  '/manifest.appcache':             ['permitAll'],
   '/**/favicon.ico':                ['permitAll']]
 grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_ADMIN > ROLE_OWNER
