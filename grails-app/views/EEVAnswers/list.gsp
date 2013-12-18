@@ -14,6 +14,7 @@
 			<g:render template="/shared/alerts"/>
 			<ul>
 				<li ng-repeat="eev in eevs"><a href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}">{{eev.eevQuestions.title}} - {{eev.creationDate}}</a></li>
+				<h4 ng-if="eevs.length == 0">Aucun listing</h4>
 			</ul>
 		</div>
 	</body>

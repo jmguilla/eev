@@ -142,6 +142,7 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.jmguilla.eev.
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.jmguilla.eev.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.jmguilla.eev.Role'
 grails.plugin.springsecurity.securityConfigType = "Annotation"
+grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
   '/':                              ['permitAll'],
   '/dbconsole/**':                  ['permitAll'],

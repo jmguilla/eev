@@ -8,12 +8,6 @@
     margin: 0 auto;
 }
 
-a.navbar-brand {
-	color: #428bca !important;
-}
-
-.navbar { height: 50px; }
-
 .container-full {
   margin: 0 auto;
   width: 100%;

@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v 0.1
+# v0.1
 #direct db
 /eev/EEVQuestions/show/1
 /eev/EEVQuestions/get/1.json
@@ -26,3 +26,5 @@ CACHE MANIFEST
 FALLBACK:
 /eev/static/bundle-angular_app_controllers_online_defer.js /eev/static/js/app/controllers_offline.js
 
+NETWORK:
+*
