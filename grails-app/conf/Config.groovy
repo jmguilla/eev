@@ -153,7 +153,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
   '/**/js/**':                      ['permitAll'],
   '/**/css/**':                     ['permitAll'],
   '/**/images/**':                  ['permitAll'],
-  '/manifest.appcache':             ['permitAll'],
+  '/**/cache.manifest':             ['permitAll'],
   '/**/favicon.ico':                ['permitAll']]
 grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_ADMIN > ROLE_OWNER

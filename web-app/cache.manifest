@@ -1,31 +1,28 @@
 CACHE MANIFEST
 # v 0.1
-NETWORK :
-eev/static/bundle-bundle_angular_app_controllers_online_defer.js 
-
-FALLBACK :
-eev/static/bundle-bundle_angular_app_controllers_online_defer.js eev/static/bundle-bundle_angular_app_controllers_offline_defer.js
-
-CACHE :
 #direct db
-eev/EEVQuestions/show/1
-eev/EEVQuestions/get/1.json
+/eev/EEVQuestions/show/1
+/eev/EEVQuestions/get/1.json
 
 #css
-eev/static/css/main.css
-eev/static/css/mobile.css
-eev/static/bundle-bundle_bootstrap_head.css
+/eev/static/css/main.css
+/eev/static/css/mobile.css
+/eev/static/bundle-bundle_bootstrap_head.css
+/eev/static/bundle-bundle_angular_head.css
 
 
 #img
-eev/static/images/faces.active.png
-eev/static/images/faces.png
-eev/static/plugins/twitter-bootstrap-3.0.2/fonts/glyphicons-halflings-regular.woff
+/eev/static/images/faces.active.png
+/eev/static/images/faces.png
+/eev/static/plugins/twitter-bootstrap-3.0.2/fonts/glyphicons-halflings-regular.woff
 
 #js
-eev/static/bundle-bundle_bootstrap_defer.js
-eev/static/bundle-bundle_angular_defer.js
-eev/static/js/lib/bootstrap-ui-0.7/ui-bootstrap-tpls-0.7.0.js
-eev/static/bundle-bundle_angular_app_defer.js
-eev/static/bundle-bundle_angular_app_controllers_offline_defer.js
-eev/static/plugins/jquery-1.10.2/js/jquery/jquery-1.10.2.min.js
+/eev/static/bundle-bundle_bootstrap_defer.js
+/eev/static/bundle-bundle_angular_defer.js
+/eev/static/js/lib/bootstrap-ui-0.7/ui-bootstrap-tpls-0.7.0.js
+/eev/static/bundle-bundle_angular_app_defer.js
+/eev/static/plugins/jquery-1.10.2/js/jquery/jquery-1.10.2.min.js
+
+FALLBACK:
+/eev/static/bundle-angular_app_controllers_online_defer.js /eev/static/js/app/controllers_offline.js
+
