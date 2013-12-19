@@ -146,12 +146,13 @@ grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
   '/':                              ['permitAll'],
   '/dbconsole/**':                  ['permitAll'],
-  '/User/widgets/**':               ['permitAll'],
-  '/User/widgetsOffline/**':        ['permitAll'],
-  '/User/index/**':                 ['permitAll'],
+  '/user/widgets/**':               ['permitAll'],
+  '/user/widgetsOffline/**':        ['permitAll'],
+  '/user/index/**':                 ['permitAll'],
   '/EEVQuestions/show/**':          ['permitAll'],
   '/EEVQuestions/get/**':           ['permitAll'],
   '/EEVAnswers/answer/**':          ['permitAll'],
+  '/EEVAnswers/**':                 ['ROLE_OWNER'],
   '/index':                         ['permitAll'],
   '/index.gsp':                     ['permitAll'],
   '/**/js/**':                      ['permitAll'],
@@ -160,6 +161,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
   '/**/cache.manifest':             ['permitAll'],
   '/login/**':                      ['permitAll'],
   '/logout/**':                     ['permitAll'],
+  '/user/account':                  ['IS_AUTHENTICATED_FULLY'],
   '/**/favicon.ico':                ['permitAll']]
 grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_ADMIN > ROLE_OWNER

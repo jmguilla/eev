@@ -2,7 +2,7 @@
 /* Services */
 angular.module('eevServices', ['ngResource']).
 factory('User', function($resource){
-	return $resource('/eev/User/:actionId/:userId.json', {actionId: '', userId: '@id'}, {
+	return $resource('/eev/user/:actionId/:userId.json', {actionId: '', userId: '@id'}, {
 		widgets: {
 			method: 'GET',
 			params: {
@@ -11,6 +11,16 @@ factory('User', function($resource){
 			headers: {
   			'Content-Type': 'application/json',
   			'Accept': 'application/json'
+			}
+		},
+		updatePWD: {
+			method: 'POST',
+			params: {
+				actionId: 'updatePWD'
+			},
+			headers: {
+	  			'Content-Type': 'application/json',
+	  			'Accept': 'application/json'
 			}
 		}
 	});

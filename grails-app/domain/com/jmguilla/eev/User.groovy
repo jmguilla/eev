@@ -20,7 +20,7 @@ class User {
     email nullable: false, blank: false, unique: true
   }
 
-  static mapping = { password column: '`password`' }
+  static mapping = { password column: 'password' }
 
   Set<Role> getAuthorities() {
     UserRole.findAllByUser(this).collect { it.role } as Set

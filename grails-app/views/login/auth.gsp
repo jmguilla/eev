@@ -2,15 +2,13 @@
 <head>
 	<meta name='layout' content='main_no_cache'/>
 	<title><g:message code="springSecurity.login.title"/></title>
-	<r:require module="bootstrap"/>
+	<r:require module="angular_app"/>
 </head>
 <body>
 <g:render template="/shared/nav"/>
+<g:render template="/shared/alerts"/>
 <div id='login'>
 	<div class='container'>
-		<g:if test='${flash.message}'>
-			<div class='login_message'>${flash.message}</div>
-		</g:if>
 		<div class="row">
 			<form action='${postUrl}' method='POST' id='loginForm' class='col-xs-12 col-md-4 col-md-offset-4 form-horizontal' role="form" autocomplete='off'>
 				<div class="form-group">

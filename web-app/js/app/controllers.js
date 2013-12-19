@@ -1,10 +1,23 @@
 'use strict';
 /* Controllers */
-app.controller('UserCtrl', function($scope, User) {
+app.controller('UserAccountCtrl', function($scope, $sce, User) {
+	$scope.alerts = [];
+	$scope.change = function(){
+		User.updatePWD({},{current: $scope.current, newPWD: $scope.newPWD, newPWDAgain: $scope.newPWDAgain},
+		function(data, headers){
+			$scope.alerts.push(data);
+		},
+		function(httpResponse){
+			$scope.alerts.push(httpResponse.data);
+		});
+	}
+});
+
+app.controller('NavCtrl', function($scope, $sce, User) {
 	$scope.init = function(){
 		User.widgets({},
 		function(data, headers){
-			$scope.nav = data.nav;
+			$scope.nav = $sce.trustAsHtml(data.nav);
 		},
 		function(httpResponse){
 			alert('Un probleme s\'est produit.');
