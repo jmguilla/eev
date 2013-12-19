@@ -1,12 +1,27 @@
 'use strict';
 /* Services */
 angular.module('eevServices', ['ngResource']).
+factory('User', function($resource){
+	return $resource('/eev/User/:actionId/:userId.json', {actionId: '', userId: '@id'}, {
+		widgets: {
+			method: 'GET',
+			params: {
+				actionId: 'widgets'
+			},
+			headers: {
+  			'Content-Type': 'application/json',
+  			'Accept': 'application/json'
+			}
+		}
+	});
+}).
+
 factory('EEVQuestions', function($resource){
   return $resource('/eev/EEVQuestions/:actionId/:eevId.json', {actionId: '', eevId: '@id'}, {
   	get:{
   		method: 'GET',
   		params: {
-  			actionId: 'get',
+  			actionId: 'get'
   		},
   		headers: {
   			'Content-Type': 'application/json',

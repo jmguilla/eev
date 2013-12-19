@@ -15,7 +15,7 @@
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>
-	<body>
+	<body ng-app="eev" >
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

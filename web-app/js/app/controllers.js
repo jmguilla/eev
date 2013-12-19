@@ -1,5 +1,16 @@
 'use strict';
 /* Controllers */
+app.controller('UserCtrl', function($scope, User) {
+	$scope.init = function(){
+		User.widgets({},
+		function(data, headers){
+			$scope.nav = data.nav;
+		},
+		function(httpResponse){
+			alert('Un probleme s\'est produit.');
+		});
+	}
+});
 app.controller('EEVAnswersListCtrl', function($scope, EEVAnswers) {
 	$scope.alerts = [];
 	var data = EEVAnswers.list({},
