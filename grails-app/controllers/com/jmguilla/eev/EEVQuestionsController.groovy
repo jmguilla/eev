@@ -105,66 +105,67 @@ class EEVQuestionsController {
     }
   }
 
-  protected void bindEEV(EEVQuestions eev, JSONObject input, boolean update){
-    //TODO switch to services
-    bindData(eev, input)
-    for(group in input.contents){
-      def newGroup = (update?EEVRowsGroup.get(group.id): new EEVRowsGroup())
-      bindGroup(update, newGroup, group)
-      eev.addToContents(newGroup.save(failOnError: true))
-    }
-    def interviewee = User.findByEmailIlike(input.interviewee.email)
-    if(!interviewee){
-      interviewee = new User()
-      interviewee.email = input.interviewee.email
-      interviewee = interviewee.save(failOnError: true)
-    }
-    eev.interviewee = interviewee
-    def interviewer = User.findByEmailIlike(input.interviewer.email)
-    if(!interviewer){
-      interviewer = new User()
-      interviewer.email = input.interviewer.email
-      interviewer = interviewer.save(failOnError: true)
-    }
-    eev.interviewer = interviewer
-  }
-
-  def bindGroup(boolean update, EEVRowsGroup newGroup, JSONObject group){
-    bindData(newGroup, group)
-    for(content in group.contents){
-      def newContent = null
-      if(content.contents){
-        newContent = (update?EEVRowsGroup.get(content.id): new EEVRowsGroup())
-        bindGroup(update, newContent, content)
-      }else{
-        newContent = (update?EEVRow.get(content.id):new EEVRow())
-        bindRow(update, newContent, content)
-      }
-      newGroup.addToContents(newContent.save(failOnError: true))
-    }
-  }
-
-  def bindRow(boolean update, EEVRow newRow, JSONObject content){
-    def newQuestionClass = grailsApplication.getDomainClass(content.question.class).clazz
-    def newQuestion = (update?newQuestionClass.get(content.question.id): newQuestionClass.newInstance())
-    def newAnswerClass = grailsApplication.getDomainClass(content.answer.class).clazz
-    def newAnswer = (update?newAnswerClass.get(content.answer.id): newAnswerClass.newInstance())
-    newAnswer.answer = new Integer(content.answer.answer)
-    newQuestion.question = content.question.question
-    newRow.rank = content.rank
-    newRow.question = newQuestion.save(failOnError: true)
-    newRow.answer = newAnswer.save(failOnError: true)
-  }
-
-//  def handleException(Exception e) {
-//    def myStream = new ByteArrayOutputStream()
-//    e.printStackTrace(myStream)
-//    myStream.close()
-//    def toRender = "${e.toString()} - ${myStream.toString()}"
-//    response.status = 500
-//    withFormat{
-//      json{ render ([type: 'danger', content: toRender] as JSON) }
-//      html{ render text: toRender}
+//  protected void bindEEV(EEVQuestions eev, JSONObject input, boolean update){
+//    //TODO switch to services
+//    bindData(eev, input)
+//    for(group in input.contents){
+//      def newGroup = (update?EEVRowsGroup.get(group.id): new EEVRowsGroup())
+//      bindGroup(update, newGroup, group)
+//      eev.addToContents(newGroup.save(failOnError: true))
+//    }
+//    def interviewee = User.findByEmailIlike(input.interviewee.email)
+//    if(!interviewee){
+//      interviewee = new User()
+//      interviewee.email = input.interviewee.email
+//      interviewee = interviewee.save(failOnError: true)
+//    }
+//    eev.interviewee = interviewee
+//    def interviewer = User.findByEmailIlike(input.interviewer.email)
+//    if(!interviewer){
+//      interviewer = new User()
+//      interviewer.email = input.interviewer.email
+//      interviewer = interviewer.save(failOnError: true)
+//    }
+//    eev.interviewer = interviewer
+//  }
+//
+//  def bindGroup(boolean update, EEVRowsGroup newGroup, JSONObject group){
+//    bindData(newGroup, group)
+//    for(content in group.contents){
+//      def newContent = null
+//      if(content.contents){
+//        newContent = (update?EEVRowsGroup.get(content.id): new EEVRowsGroup())
+//        bindGroup(update, newContent, content)
+//      }else{
+//        newContent = (update?EEVRow.get(content.id):new EEVRow())
+//        bindRow(update, newContent, content)
+//      }
+//      newGroup.addToContents(newContent.save(failOnError: true))
 //    }
 //  }
+//
+//  def bindRow(boolean update, EEVRow newRow, JSONObject content){
+//    def newQuestionClass = grailsApplication.getDomainClass(content.question.class).clazz
+//    def newQuestion = (update?newQuestionClass.get(content.question.id): newQuestionClass.newInstance())
+//    def newAnswerClass = grailsApplication.getDomainClass(content.answer.class).clazz
+//    def newAnswer = (update?newAnswerClass.get(content.answer.id): newAnswerClass.newInstance())
+//    newAnswer.answer = new Integer(content.answer.answer)
+//    newQuestion.question = content.question.question
+//    newRow.rank = content.rank
+//    newRow.question = newQuestion.save(failOnError: true)
+//    newRow.answer = newAnswer.save(failOnError: true)
+//  }
+
+  def handleException(Exception e) {
+    def myStream = new ByteArrayOutputStream()
+    def printStream = new PrintStream(myStream)
+    e.printStackTrace(printStream)
+    printStream.close()
+    def toRender = "${e.toString()} - ${myStream.toString()}"
+    response.status = 500
+    withFormat{
+      json{ render ([type: 'danger', content: toRender] as JSON) }
+      html{ render text: toRender}
+    }
+  }
 }
