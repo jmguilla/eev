@@ -155,4 +155,16 @@ class EEVQuestionsController {
     newRow.question = newQuestion.save(failOnError: true)
     newRow.answer = newAnswer.save(failOnError: true)
   }
+
+//  def handleException(Exception e) {
+//    def myStream = new ByteArrayOutputStream()
+//    e.printStackTrace(myStream)
+//    myStream.close()
+//    def toRender = "${e.toString()} - ${myStream.toString()}"
+//    response.status = 500
+//    withFormat{
+//      json{ render ([type: 'danger', content: toRender] as JSON) }
+//      html{ render text: toRender}
+//    }
+//  }
 }
