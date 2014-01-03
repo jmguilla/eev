@@ -36,17 +36,17 @@ environments {
       password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD")
       url = "jdbc:mysql://${System.getenv('OPENSHIFT_MYSQL_DB_HOST')}:${System.getenv('OPENSHIFT_MYSQL_DB_PORT')}/ecouteentretien?useUnicode=yes&characterEncoding=UTF-8"
       //      dbCreate = "update"
-      //            properties {
-      //               maxActive = -1
-      //               minEvictableIdleTimeMillis=1800000
-      //               timeBetweenEvictionRunsMillis=1800000
-      //               numTestsPerEvictionRun=3
-      //               testOnBorrow=true
-      //               testWhileIdle=true
-      //               testOnReturn=false
-      //               validationQuery="SELECT 1"
-      //               jdbcInterceptors="ConnectionState"
-      //            }
+      properties {
+        maxActive = -1
+        minEvictableIdleTimeMillis=1800000
+        timeBetweenEvictionRunsMillis=1800000
+        numTestsPerEvictionRun=3
+        testOnBorrow=true
+        testWhileIdle=true
+        testOnReturn=false
+        validationQuery="SELECT 1"
+        jdbcInterceptors="ConnectionState"
+      }
     }
   }
 }
