@@ -18,12 +18,14 @@ class UserController {
       user = springSecurityService.getCurrentUser()
     }
     result.nav = g.render(template: "nav", model: [userInstance: user])
+    result.navCollapsed = g.render(template: "nav_collapsed", model: [userInstance: user])
     render(result as JSON)
   }
 
   def widgetsOffline(){
     def result = [:]
     result.nav = g.render(template: "nav_offline")
+    result.navCollapsed = g.render(template: "nav_offline_collapsed")
     render(result as JSON)
   }
 

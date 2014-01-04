@@ -8,6 +8,13 @@
       <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-home"></span></a>
+	<a ng-cloak ng-if="syncing == true" class="navbar-brand" href="#"><span class="glyphicon glyphicon-import" style="color: #8a6d3b;font-size: 14px;"></span></a>
+	<a ng-cloak ng-if="synced == true" class="navbar-brand" href="#"><span class="glyphicon glyphicon-import" style="color: #31708f;font-size: 14px;"></span></a>
+    
+    <!-- Trick to appropriate rendering with collapsed navbar -->
+	<div ng-cloak class="btn-group navbar-nav pull-left" ng-bind-html="userNavCollapsed"></div>
+	<div ng-cloak class="btn-group navbar-nav pull-left" ng-bind-html="userNav"></div>
+
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -15,8 +22,6 @@
     <ul class="nav navbar-nav">
       <li><a href="${createLink(controller: 'EEVQuestions', action: 'show', id: 1)}"><span class="glyphicon glyphicon-comment"></span></a></li>
       <li><a href="${createLink(controller: 'EEVAnswers', action: 'list')}"><span class="glyphicon glyphicon-list"></span></a></li>
-      <li ng-bind-html="nav" class="dropdown"/>
-      <li ng-if="syncing"><a href="#"><span class="glyphicon glyphicon-import"></span></a></li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>

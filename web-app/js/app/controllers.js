@@ -3,10 +3,12 @@
 app.controller('MainCtrl', function($scope, $sce, User) {
 	$scope.alerts = [];
 	$scope.syncing = false;
+	$scope.synced = false;
 	$scope.init = function(){
 		User.widgets({},
 		function(data, headers){
-			$scope.nav = $sce.trustAsHtml(data.nav);
+			$scope.userNavCollapsed = $sce.trustAsHtml(data.navCollapsed);
+			$scope.userNav = $sce.trustAsHtml(data.nav);
 		},
 		function(httpResponse){
 			$scope.alerts.push({type: 'danger', content: 'Un probleme s\'est produit: ' + httpResponse.data});

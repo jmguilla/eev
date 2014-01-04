@@ -22,6 +22,10 @@ class EEVAnswersController {
       }
     }
   }
+  
+  def listOffline(){
+      render([] as JSON)
+  }
 
   @Transactional
   def answer() {

@@ -1,1 +1,1 @@
-<a href="#"><span class="glyphicon glyphicon-ban-circle"></span></a>
+<button type="button" class="btn navbar-btn btn-default dropdown-toggle hidden-xs btn-dropdown-like pull-left" data-toggle="dropdown"><span class="glyphicon glyphicon-ban-circle" style="color: #a94442;"></span></button>

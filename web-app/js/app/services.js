@@ -90,7 +90,7 @@ factory('EEVAnswers', function($resource){
 					if(scope.numberInSync <= 0){
 						localStorage.answers = JSON.stringify(pendingAnswers);
 						scope.syncing = false;
-						scope.alerts.push({type: 'info', content: 'Les données de cette machine ont été synchronisées.'});
+						scope.alerts.push({type: 'info', content: 'Tentative de synchronisation des données de cette machine effectuée.'});
 					}
 				};
 				scope.numberInSync = 0;
@@ -105,10 +105,13 @@ factory('EEVAnswers', function($resource){
 					}, function(httpResponse) {
 						//danger, what shall we do?
 						updateSync(scope, pendingAnswers);
-						if (httpResponse.data.type != undefined) {
-							scope.alerts.push(httpResponse.data);
-						}else{
-							scope.alerts.push({type: 'danger', content: 'Un problème inconnu s\'est produit'});
+						//status == 0 means fetching of the resource failed
+						if(httpResponse.status){
+							if (httpResponse.data.type != undefined) {
+								scope.alerts.push(httpResponse.data);
+							}else{
+								scope.alerts.push({type: 'danger', content: 'Un problème inconnu s\'est produit'});
+							}
 						}
 					});
 				}
@@ -162,18 +165,23 @@ factory('EEVAnswers', function($resource){
 	 */
 	eevAnswersService.loadLists = function(scope){
 	//loading those available from remote server
-	this.resource.list({},
+	if(navigator.onLine){
+		this.resource.list({},
 			function(data, headers){
 				scope.eevs = data;
 			},
 			function(httpResponse){
-				if (httpResponse.data.type != undefined) {
-					scope.alerts.push(httpResponse.data);
-				}else{
-					scope.alerts.push({type: 'danger', content: 'Un problème inconnu s\'est produit: ' + httpResponse.data});
+				//status == 0 means fetching of the resource failed
+				if(httpResponse.status){
+					if (httpResponse.data.type != undefined) {
+						scope.alerts.push(httpResponse.data);
+					}else{
+						scope.alerts.push({type: 'danger', content: 'Un problème inconnu s\'est produit: ' + httpResponse.data});
+					}
 				}
 			});
-	
+	}
+		
 	//check if some are pending
 	var pendingAnswers = localStorage.answers;
 	if(!!pendingAnswers == true){

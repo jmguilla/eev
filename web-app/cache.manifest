@@ -1,8 +1,9 @@
 CACHE MANIFEST
-# v0.1qsdf
+# v0.1
 #direct db
 /eev/EEVQuestions/show/1
 /eev/EEVQuestions/get/1.json
+/eev/EEVAnswers/list/
 
 #css
 /eev/static/css/main.css
@@ -25,6 +26,7 @@ CACHE MANIFEST
 
 FALLBACK:
 /eev/user/widgets.json /eev/user/widgetsOffline.json
+/eev/EEVAnswers/list.json /eev/EEVAnswers/listOffline.json
 
 NETWORK:
 *

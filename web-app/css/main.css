@@ -70,3 +70,15 @@
 .panel-heading a, .panel-heading a:hover{
 	color: white;
 }
+
+button.navbar-btn.no-collapse{
+	margin: 2px 8px 0px 8px !important;
+}
+
+button.btn-dropdown-like,button.btn-dropdown-like.open{
+	border: 0px;
+	background-color: #f8f8f8 !important;
+	color: #777777;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
