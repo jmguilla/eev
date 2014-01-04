@@ -13,9 +13,9 @@
 		<h3>{{eev.title}}</h3>
 		<form role="form">
 		<div class="form-group">
-		  <label for="interviewer">Email Interviewer</label>
+		  <label for="interviewer">Email Manager</label>
 		  <div>
-		  	<input ng-model="$parent.interviewer" type="text" class="form-control" id="interviewer" placeholder="Email interviewer" />
+		  	<input ng-model="$parent.interviewer" type="text" class="form-control" id="interviewer" placeholder="Email interviewer"/>
 		  </div>
 		</div>
 		</form>
@@ -23,7 +23,7 @@
 	<div class="col-xs-12">
 		<form role="form">
 		<div class="form-group">
-		  <label for="interviewee">Email Interviewe</label>
+		  <label for="interviewee">Email Vendeur</label>
 		  <div>
 		  	<input ng-model="$parent.interviewee" type="text" class="form-control" id="interviewee" placeholder="Email interviewe" />
 		  </div>
@@ -35,10 +35,15 @@
 	<div class="col-xs-12">
 		<div ng-repeat="group in eev.contents | orderBy:'rank'" class="panel panel-primary">
 		<div class="panel-heading">
-			<div class="col-xs-9 col-md-12">{{group.title}}</div>
+			<div class="col-xs-9 col-md-12">
+			<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index}}">{{group.title}}</a>
+			</div>
 			<div class="btn-group hidden-md hidden-lg pull-right col-xs-3">
 			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			  <span class="glyphicon glyphicon-list"></span>
+			  <span ng-if="!!answers[group.weaknessesQuestion.question.id] == false && !!answers[group.strengthsQuestion.question.id] == true" class="glyphicon glyphicon-thumbs-up"></span>
+			  <span ng-if="!!answers[group.weaknessesQuestion.question.id] == true  && !!answers[group.strengthsQuestion.question.id] == false" class="glyphicon glyphicon-thumbs-down"></span>
+			  <span ng-if="!!answers[group.weaknessesQuestion.question.id] == true  && !!answers[group.strengthsQuestion.question.id] == true" class="glyphicon glyphicon-ok"></span>
+			  <span ng-if="!!answers[group.weaknessesQuestion.question.id] == false && !!answers[group.strengthsQuestion.question.id] == false" class="glyphicon glyphicon-list"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
 			    <li><a href="#" data-toggle="modal" data-target="#pointsForts{{$index}}">Points Forts</a></li>
@@ -81,46 +86,48 @@
 			</div>
       		<div class="clearfix"></div>
 		</div>
-		<div class="panel-body">
-			<div class="list-group col-xs-12 col-md-4">
-			 <a class="row list-group-item" ng-repeat="content in group.contents|orderBy:'rank'|flatten">
-			 	<div class="col-xs-12" ng-show="content.flattened"><span ng-bind-html="content.title" ></span></div>
-				<div class="col-xs-12 col-sm-6" ng-hide="content.flattened">
-					<span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span>
-				</div>
-				<div ng-hide="content.flattened" class="col-xs-12 col-sm-6">
-					<div class="btn-group pull-right">
-						<button class="btn face face3" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '3'}" ng-click="answers[content.question.id] = '3'"></button>
-						<button class="btn face face2" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '2'}" ng-click="answers[content.question.id] = '2'"></button>
-						<button class="btn face face1" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '1'}" ng-click="answers[content.question.id] = '1'"></button>
-						<button class="btn face face0" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '0'}" ng-click="answers[content.question.id] = '0'"></button>
+		<div id="collapse{{$index}}" class="panel-collapse collapse out">
+			<div class="panel-body">
+				<div class="list-group col-xs-12 col-md-4">
+				 <a class="row list-group-item" ng-repeat="content in group.contents|orderBy:'rank'|flatten">
+				 	<div class="col-xs-12" ng-show="content.flattened"><span ng-bind-html="content.title" ></span></div>
+					<div class="col-xs-12 col-sm-6" ng-hide="content.flattened">
+						<span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span>
 					</div>
+					<div ng-hide="content.flattened" class="col-xs-12 col-sm-6">
+						<div class="btn-group pull-right">
+							<button class="btn face face3" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '3'}" ng-click="answers[content.question.id] = '3'"></button>
+							<button class="btn face face2" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '2'}" ng-click="answers[content.question.id] = '2'"></button>
+							<button class="btn face face1" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '1'}" ng-click="answers[content.question.id] = '1'"></button>
+							<button class="btn face face0" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '0'}" ng-click="answers[content.question.id] = '0'"></button>
+						</div>
+					</div>
+				 </a>
+				 </div>
+			 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
+			 		<div class="panel panel-default">
+				 		<div class="panel-heading panel-title">Points forts</div>
+				 		<div class="panel-body">
+					 		<form role="form" style="height: 100%;">
+					 			<div class="form-group">
+						 			<textarea ng-model="answers[group.strengthsQuestion.question.id]" class="form-control"></textarea>
+					 			</div>
+					 		</form>
+				 		</div>
+			 		</div>
 				</div>
-			 </a>
-			 </div>
-		 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
-		 		<div class="panel panel-default">
-			 		<div class="panel-heading panel-title">Points forts</div>
-			 		<div class="panel-body">
-				 		<form role="form" style="height: 100%;">
-				 			<div class="form-group">
-					 			<textarea ng-model="answers[group.strengthsQuestion.question.id]" class="form-control"></textarea>
-				 			</div>
-				 		</form>
+			 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
+			 		<div class="panel panel-default">
+				 		<div class="panel-heading panel-title">Points faibles</div>
+				 		<div class="panel-body">
+					 		<form role="form" style="height: 100%;">
+					 			<div class="form-group">
+						 			<textarea ng-model="answers[group.weaknessesQuestion.question.id]" class="form-control"></textarea>
+					 			</div>
+					 		</form>
+				 		</div>
 			 		</div>
-		 		</div>
-			</div>
-		 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
-		 		<div class="panel panel-default">
-			 		<div class="panel-heading panel-title">Points faibles</div>
-			 		<div class="panel-body">
-				 		<form role="form" style="height: 100%;">
-				 			<div class="form-group">
-					 			<textarea ng-model="answers[group.weaknessesQuestion.question.id]" class="form-control"></textarea>
-				 			</div>
-				 		</form>
-			 		</div>
-		 		</div>
+				</div>
 			</div>
 		</div>
 	</div>

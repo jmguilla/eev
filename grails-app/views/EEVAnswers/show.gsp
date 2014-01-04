@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="main_no_cache">
 		<title>EEV</title>
 		<link type="text/css" href="${createLinkTo(dir:'css',file:'main.css')}" />
 		<r:require module="angular_app"/>
