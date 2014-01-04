@@ -31,8 +31,8 @@ class EEVAnswers {
 
 
   static constraints = {
-    interviewer(nullable: true)
-    interviewee(nullable: true)
+    interviewer(nullable: true, blank: false, email: true)
+    interviewee(nullable: true, blank: false, email: true)
     answers(nullable: true)
     creationDate(nullable: false)
   }

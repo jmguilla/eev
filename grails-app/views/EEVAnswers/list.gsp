@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="main_no_cache">
 		<title>List des EEV</title>
 		<r:require module="angular_app"/>
 		<r:require module="bootstrap"/>
