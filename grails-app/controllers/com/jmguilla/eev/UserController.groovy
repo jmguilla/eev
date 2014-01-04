@@ -24,6 +24,7 @@ class UserController {
   def widgetsOffline(){
     def result = [:]
     result.nav = g.render(template: "nav_offline")
+    render(result as JSON)
   }
 
   def account(){

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main_no_cache">
+		<meta name="layout" content="main">
 		<title>Repondre a un EEV</title>
 		<r:require module="angular_app"/>
 		<r:require module="bootstrap"/>

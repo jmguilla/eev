@@ -67,6 +67,6 @@
   max-height:40px;
 }
 
-.panel-heading a{
+.panel-heading a, .panel-heading a:hover{
 	color: white;
 }

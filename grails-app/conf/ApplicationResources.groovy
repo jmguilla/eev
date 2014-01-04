@@ -20,7 +20,7 @@ modules = {
     resource url:'js/app/services.js'
     resource url:'js/app/app.js'
     resource url:'js/app/filters.js'
-    resource url:'js/app/controllers.js', bundle: 'angular_app_controllers_online'
+    resource url:'js/app/controllers.js'
     resource url:'js/app/config.js'
   }
 

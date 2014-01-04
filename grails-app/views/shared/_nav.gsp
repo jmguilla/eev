@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation" ng-controller="NavCtrl" ng-init="init()">
+<nav class="navbar navbar-default" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -16,6 +16,7 @@
       <li><a href="${createLink(controller: 'EEVQuestions', action: 'show', id: 1)}"><span class="glyphicon glyphicon-comment"></span></a></li>
       <li><a href="${createLink(controller: 'EEVAnswers', action: 'list')}"><span class="glyphicon glyphicon-list"></span></a></li>
       <li ng-bind-html="nav" class="dropdown"/>
+      <li ng-if="syncing"><a href="#"><span class="glyphicon glyphicon-import"></span></a></li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>
