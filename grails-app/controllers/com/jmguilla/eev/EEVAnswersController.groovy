@@ -85,13 +85,23 @@ class EEVAnswersController {
   @Transactional
   def show(){
     withFormat{
+      pdf{
+        if(!params.id){
+          response.sendError(400, "Un id doit etre fourni")
+          return
+        }
+        def eev = EEVAnswers.get(Integer.parseInt(params.id))
+        if(!eev){
+          response.sendError(400, "Aucun EEV ne correspond a cet id: ${params.id}")
+          return
+        }
+        render(view: "_pdf", model: [eev: eev], filename: "eev-${eev.id}")
+      }
       html{
         if(!params.id){
           response.sendError(404)
         }
         render view: 'show', model: [params: params]
-      }
-      json{
       }
       '*'{
         response.status = 400

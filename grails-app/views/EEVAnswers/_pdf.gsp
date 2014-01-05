@@ -1,0 +1,95 @@
+<%@ page import="com.jmguilla.eev.EEVQuestions" %>
+<%@ page import="com.jmguilla.eev.EEVAnswers" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta name="layout" content="main_no_cache"/>
+		<title>EEV</title>
+		<link type="text/css" href="${createLinkTo(dir:'css',file:'main.css')}" />
+		<r:require module="bootstrap"/>
+	</head>
+	<body>
+		<div class="col-xs-12">
+		<div class="row">
+			<div class="col-xs-12">
+				<h3><%=eev.eevQuestions.title%></h3>
+				<form role="form">
+				<div class="form-group">
+				  <label for="interviewer">Email Manager</label>
+				  <div>
+				  	<input type="text" class="form-control" id="interviewer" placeholder="Email Manager" value="<%=eev.interviewer %>"/>
+				  </div>
+				</div>
+				</form>
+			</div>
+			<div class="col-xs-12">
+				<form role="form">
+				<div class="form-group">
+				  <label for="interviewee">Email Vendeur</label>
+				  <div>
+				  	<input type="text" class="form-control" id="interviewee" placeholder="Email Vendeur" value="<%=eev.interviewee%>" />
+				  </div>
+				</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<g:each in="${eev.eevQuestions.contents.sort{it.rank}}" var="group" status="index">
+				<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="col-xs-9 col-md-12">${group.title}</div>
+      			<div class="clearfix"></div>
+				</div>
+					<div class="panel-body">
+						<div class="list-group col-xs-12 col-md-4">
+						<g:each in="${group.contents.sort{it.rank}}" var="content">
+						<!-- missing flatten filter -->
+						 <a class="row list-group-item">
+						 	<!-- <div class="col-xs-12" ng-show="content.flattened"><span ng-bind-html="content.title" ></span></div>
+							<div class="col-xs-12 col-sm-6" ng-hide="content.flattened">
+								<span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span>
+							</div>
+							<div ng-hide="content.flattened" class="col-xs-12 col-sm-6">
+								<div class="btn-group pull-right">
+									<button class="btn face face3" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '3'}" ng-click="answers[content.question.id] = '3'"></button>
+									<button class="btn face face2" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '2'}" ng-click="answers[content.question.id] = '2'"></button>
+									<button class="btn face face1" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '1'}" ng-click="answers[content.question.id] = '1'"></button>
+									<button class="btn face face0" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '0'}" ng-click="answers[content.question.id] = '0'"></button>
+								</div>
+							</div>-->
+						 </a>
+						</g:each>
+						 </div>
+					 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
+					 		<div class="panel panel-default">
+						 		<div class="panel-heading panel-title">Points forts</div>
+						 		<div class="panel-body">
+							 		<form role="form" style="height: 100%;">
+							 			<div class="form-group">
+								 			<textarea ng-model="answers[group.strengthsQuestion.question.id]" class="form-control">${eev.answers}</textarea>
+							 			</div>
+							 		</form>
+						 		</div>
+					 		</div>
+						</div>
+					 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
+					 		<div class="panel panel-default">
+						 		<div class="panel-heading panel-title">Points faibles</div>
+						 		<div class="panel-body">
+							 		<form role="form" style="height: 100%;">
+							 			<div class="form-group">
+								 			<textarea ng-model="answers[group.weaknessesQuestion.question.id]" class="form-control"></textarea>
+							 			</div>
+							 		</form>
+						 		</div>
+					 		</div>
+						</div>
+					</div>
+				</div>
+			</g:each>
+		</div>
+		</div>
+		</div>
+	</body>
+</html>
