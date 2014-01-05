@@ -22,9 +22,9 @@ class EEVAnswersController {
       }
     }
   }
-  
+
   def listOffline(){
-      render([] as JSON)
+    render([] as JSON)
   }
 
   @Transactional
