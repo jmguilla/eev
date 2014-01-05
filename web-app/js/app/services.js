@@ -143,6 +143,7 @@ factory('EEVAnswers', function($resource){
 				scope.answers = {};
 				scope.interviewer = '';
 				scope.interviewee = '';
+				this.sync(scope, this);
 			}, function(httpResponse) {
 				storeLocally();
 				scope.eevSubmitting = false;
@@ -157,7 +158,6 @@ factory('EEVAnswers', function($resource){
 			scope.eevSubmitting = false;
 			scope.alerts.push({type: 'success', content: 'EEV enregistré sur l\'appareil. Il sera synchronisé plus tard.'});
 		}
-		this.sync(scope, this);
 	};
 	
 	/**
