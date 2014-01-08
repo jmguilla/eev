@@ -48,7 +48,7 @@ class BootStrap {
 
       group = new EEVRowsGroup(title: 'Découverte des besoins et des motivations', rank: new Integer(3)).save(failOnError: true)
       group.addToContents(new EEVRow( rank: new Integer(1), question: new Question( answerType: MagnitudeAnswer.class.name, question: "utilise des questions ouvertes et factuelles")).save(failOnError: true))
-      group.addToContents(new EEVRow( rank: new Integer(2), question: new Question( answerType: MagnitudeAnswer.class.name, question: "laisse parler son client: <strong>client 80%, vendeur 20%<strong>")).save(failOnError: true))
+      group.addToContents(new EEVRow( rank: new Integer(2), question: new Question( answerType: MagnitudeAnswer.class.name, question: "laisse parler son client: <strong>client 80%, vendeur 20%</strong>")).save(failOnError: true))
 
       EEVRowsGroup subGroup = new EEVRowsGroup(title: 'écoute son client et découvre:', rank: new Integer(3)).save(failOnError: true)
       group.addToContents(subGroup)
@@ -58,7 +58,7 @@ class BootStrap {
       subGroup.addToContents(new EEVRow( rank: new Integer(4), question: new Question( answerType: MagnitudeAnswer.class.name, question: "combien: budet, mensualité")).save(failOnError: true))
       subGroup.addToContents(new EEVRow( rank: new Integer(5), question: new Question( answerType: MagnitudeAnswer.class.name, question: "qui: profil, client pass, décideur, ...")).save(failOnError: true))
       subGroup.addToContents(new EEVRow( rank: new Integer(6), question: new Question( answerType: MagnitudeAnswer.class.name, question: "comment: concurrence")).save(failOnError: true))
-      subGroup.addToContents(new EEVRow( rank: new Integer(7), question: new Question( answerType: MagnitudeAnswer.class.name, question: "les 3 motivations principales <strong>SONCASE<strong>")).save(failOnError: true))
+      subGroup.addToContents(new EEVRow( rank: new Integer(7), question: new Question( answerType: MagnitudeAnswer.class.name, question: "les 3 motivations principales <strong>SONCASE</strong>")).save(failOnError: true))
 
       group.addToContents(new EEVRow( rank: new Integer(4), question: new Question( answerType: MagnitudeAnswer.class.name, question: "reformule pour valider (obtient des \"oui\")")).save(failOnError: true))
       group.addToContents(new EEVRow( rank: new Integer(5), question: new Question( answerType: MagnitudeAnswer.class.name, question: "utilise la découverte en étoiles (ventes complémentaires)")).save(failOnError: true))

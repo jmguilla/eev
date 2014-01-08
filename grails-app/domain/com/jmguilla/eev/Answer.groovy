@@ -11,4 +11,6 @@ class Answer {
 
   static constraints = {
   }
+  
+  static fetchMode = [question: 'eager']
 }

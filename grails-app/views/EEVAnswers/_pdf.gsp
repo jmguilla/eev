@@ -1,5 +1,6 @@
 <%@ page import="com.jmguilla.eev.EEVQuestions" %>
 <%@ page import="com.jmguilla.eev.EEVAnswers" %>
+<%@ page import="com.jmguilla.eev.EEVRowsGroup" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
@@ -43,12 +44,27 @@
 				</div>
 					<div class="panel-body">
 						<div class="list-group col-xs-12 col-md-4">
-						<g:each in="${group.contents.sort{it.rank}}" var="content">
-						<!-- missing flatten filter -->
+						<%
+            				//flattening
+            				def flattenedRows = []
+                    		def flattenedIds = []
+                   			group.contents.sort{it.rank}.each{
+                               	flattenedRows.add(it)
+                           		if(it.hasProperty('contents')){
+                                 it.contents.each{row -> row.metaClass.margin = {'margin'} }
+                                 flattenedRows.addAll(it.contents.sort{row -> row.rank})
+                                 flattenedIds.addAll(it.contents*.id)
+                                }
+                            }
+            			 %>
+						<g:each in="${flattenedRows}" var="content" status="jindex">
 						 <a class="row list-group-item">
-						 	<!-- <div class="col-xs-12" ng-show="content.flattened"><span ng-bind-html="content.title" ></span></div>
-							<div class="col-xs-12 col-sm-6" ng-hide="content.flattened">
-								<span ng-class="{margin: content.margin}" ng-bind-html="content.question.question" ></span>
+						 	<g:if test="${ content.hasProperty('contents')}">
+						 	<div class="col-xs-12"><span>${content.title}</span></div>
+						 	</g:if>
+						 	<g:else>
+							<div class="col-xs-12 col-sm-6">
+								<span class="${flattenedIds.contains(content.id)?'margin':''}">${content.question.question}</span>
 							</div>
 							<div ng-hide="content.flattened" class="col-xs-12 col-sm-6">
 								<div class="btn-group pull-right">
@@ -57,7 +73,8 @@
 									<button class="btn face face1" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '1'}" ng-click="answers[content.question.id] = '1'"></button>
 									<button class="btn face face0" name="answer{{$index}}" ng-class="{'active':answers[content.question.id] == '0'}" ng-click="answers[content.question.id] = '0'"></button>
 								</div>
-							</div>-->
+							</div>
+							</g:else>
 						 </a>
 						</g:each>
 						 </div>
@@ -67,7 +84,7 @@
 						 		<div class="panel-body">
 							 		<form role="form" style="height: 100%;">
 							 			<div class="form-group">
-								 			<textarea ng-model="answers[group.strengthsQuestion.question.id]" class="form-control">${eev.answers}</textarea>
+								 			<textarea class="form-control">${eev.answers.find{a -> a.question.id == group.strengthsQuestion.id}?.answer}</textarea>
 							 			</div>
 							 		</form>
 						 		</div>
@@ -79,7 +96,7 @@
 						 		<div class="panel-body">
 							 		<form role="form" style="height: 100%;">
 							 			<div class="form-group">
-								 			<textarea ng-model="answers[group.weaknessesQuestion.question.id]" class="form-control"></textarea>
+								 			<textarea class="form-control">${eev.answers.find{a -> a.question.id == group.weaknessesQuestion.id}?.answer}</textarea>
 							 			</div>
 							 		</form>
 						 		</div>
