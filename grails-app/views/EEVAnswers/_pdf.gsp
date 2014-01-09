@@ -1,13 +1,19 @@
 <%@ page import="com.jmguilla.eev.EEVQuestions" %>
 <%@ page import="com.jmguilla.eev.EEVAnswers" %>
 <%@ page import="com.jmguilla.eev.EEVRowsGroup" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="java.util.StringTokenizer" %>
+<%@ page import="org.jsoup.Jsoup" %>
+<%@ page import="org.jsoup.nodes.Document" %>
+<%@ page import="org.jsoup.nodes.Element" %>
+<%@ page import="org.jsoup.select.Elements" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
-		<meta name="layout" content="main_no_cache"/>
-		<title>EEV</title>
-		<link type="text/css" href="${createLinkTo(dir:'css',file:'main.css')}" />
-		<r:require module="bootstrap"/>
+  		<meta http-equiv="Content-Style-Type" content="text/css"/>
+  		<link rel="stylesheet" type="text/css" href="${resource(dir:'js/lib/bootstrap-3.0.3/css',file:'bootstrap.css',absolute: true)}" media="all" />
+		<link rel="stylesheet" type="text/css" href="${resource(dir:'css',file:'main.css',absolute: true)}" media="all" />
 	</head>
 	<body>
 		<div class="col-xs-12">

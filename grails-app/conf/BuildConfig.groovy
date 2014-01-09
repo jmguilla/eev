@@ -67,6 +67,7 @@ grails.project.dependency.resolution = {
     compile ":spring-security-core:2.0-RC2"
     compile ":json-apis:0.9"
     compile ":rendering:0.4.4"
+    compile ":html-cleaner:0.2"
 
     // plugins needed at runtime but not for compilation
     runtime ":hibernate:3.6.10.2" // or ":hibernate4:4.1.11.2"

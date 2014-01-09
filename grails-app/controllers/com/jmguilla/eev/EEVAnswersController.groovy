@@ -95,7 +95,8 @@ class EEVAnswersController {
           response.sendError(400, "Aucun EEV ne correspond a cet id: ${params.id}")
           return
         }
-        render(view: "_pdf", model: [eev: eev], filename: "eev-${eev.id}")
+        renderPdf(template: "pdf", model: [eev: eev], filename: "eev-${eev.id}")
+        //        render(view: "_pdf", model: [eev: eev], filename: "eev-${eev.id}")
       }
       html{
         if(!params.id){
