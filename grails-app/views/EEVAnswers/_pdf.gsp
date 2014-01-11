@@ -7153,22 +7153,31 @@ td.visible-print {
 	border: 0;
 	width: 30px;
 	height: 30px;
-	background: url("${resource(dir:'images', file: 'faces.png', absolute: true)}") 0 0 no-repeat !important;
 }
-.face.active{
-	background: url("${resource(dir:'images', file: 'faces.active.png', absolute: true)}") 0 0 no-repeat !important;
+<!-- TODO rename the face* appropriatelly -->
+.face-active-0{
+	background: url("${resource(dir:'images', file: 'face-active-3.png', absolute: true)}") 0 0 no-repeat !important;
 }
-.face3, .face3.active{
-	background-position: -30px 0px !important;
+.face-active-1{
+	background: url("${resource(dir:'images', file: 'face-active-2.png', absolute: true)}") 0 0 no-repeat !important;
 }
-.face2, .face2.active{
-	background-position: 0px 0px !important;
+.face-active-2{
+	background: url("${resource(dir:'images', file: 'face-active-1.png', absolute: true)}") 0 0 no-repeat !important;
 }
-.face1, .face1.active{
-	background-position: -60px -60px !important;
+.face-active-3{
+	background: url("${resource(dir:'images', file: 'face-active-0.png', absolute: true)}") 0 0 no-repeat !important;
 }
-.face0, .face0.active{
-	background-position: -60px -30px !important;
+.face-inactive-0{
+	background: url("${resource(dir:'images', file: 'face-inactive-3.png', absolute: true)}") 0 0 no-repeat !important;
+}
+.face-inactive-1{
+	background: url("${resource(dir:'images', file: 'face-inactive-2.png', absolute: true)}") 0 0 no-repeat !important;
+}
+.face-inactive-2{
+	background: url("${resource(dir:'images', file: 'face-inactive-1.png', absolute: true)}") 0 0 no-repeat !important;
+}
+.face-inactive-3{
+	background: url("${resource(dir:'images', file: 'face-inactive-0.png', absolute: true)}") 0 0 no-repeat !important;
 }
 
 /* angularjs animation */
@@ -7208,10 +7217,13 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
 }
+
+@page {  size: A4; }
+@page {  margin: 5px; }
 		</style>
 	</head>
 	<body>
-		<div class="col-xs-12">
+		<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
 				<h3><%=eev.eevQuestions.title%></h3>
@@ -7244,7 +7256,33 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
       			<div class="clearfix"></div>
 				</div>
 					<div class="panel-body">
-						<div class="list-group col-xs-12 col-md-4">
+						<div class="list-group col-xs-12 col-xs-12">
+						<div class="row">
+							<div class="col-xs-6">
+						 		<div class="panel panel-default">
+							 		<div class="panel-heading panel-title">Points forts</div>
+							 		<div class="panel-body">
+								 		<form role="form" style="height: 100%;">
+								 			<div class="form-group">
+									 			<textarea class="form-control">${eev.answers.find{a -> a.question.id == group.strengthsQuestion.id}?.answer}</textarea>
+								 			</div>
+								 		</form>
+							 		</div>
+						 		</div>
+							</div>
+						 	<div class="col-xs-6">
+						 		<div class="panel panel-default">
+							 		<div class="panel-heading panel-title">Points faibles</div>
+							 		<div class="panel-body">
+								 		<form role="form" style="height: 100%;">
+								 			<div class="form-group">
+									 			<textarea class="form-control">${eev.answers.find{a -> a.question.id == group.weaknessesQuestion.id}?.answer}</textarea>
+								 			</div>
+								 		</form>
+							 		</div>
+						 		</div>
+							</div>
+						</div>
 						<%
             				//flattening
             				def flattenedRows = []
@@ -7271,7 +7309,7 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
 								<div class="btn-group pull-right">
 									<g:each in="${3..0}" var="faceIndex">
 									<% def answerIndex = eev.answers.find{a -> a.question.id == content.question.id}?.answer %>
-									<button class="btn face face${faceIndex} ${answerIndex && new Integer(answerIndex) == faceIndex? 'active': ''}" ></button>
+									<button class="btn face face-${answerIndex && new Integer(answerIndex) == faceIndex? 'active': 'inactive'}-${faceIndex}" ></button>
 									</g:each>
 								</div>
 							</div>
@@ -7279,30 +7317,6 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
 						 </a>
 						</g:each>
 						 </div>
-					 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
-					 		<div class="panel panel-default">
-						 		<div class="panel-heading panel-title">Points forts</div>
-						 		<div class="panel-body">
-							 		<form role="form" style="height: 100%;">
-							 			<div class="form-group">
-								 			<textarea class="form-control">${eev.answers.find{a -> a.question.id == group.strengthsQuestion.id}?.answer}</textarea>
-							 			</div>
-							 		</form>
-						 		</div>
-					 		</div>
-						</div>
-					 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
-					 		<div class="panel panel-default">
-						 		<div class="panel-heading panel-title">Points faibles</div>
-						 		<div class="panel-body">
-							 		<form role="form" style="height: 100%;">
-							 			<div class="form-group">
-								 			<textarea class="form-control">${eev.answers.find{a -> a.question.id == group.weaknessesQuestion.id}?.answer}</textarea>
-							 			</div>
-							 		</form>
-						 		</div>
-					 		</div>
-						</div>
 					</div>
 				</div>
 			</g:each>
