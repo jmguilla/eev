@@ -25,7 +25,7 @@
 				<li ng-repeat="eev in eevs">
 				<a ng-if="!!eev.interviewee == true" href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.html">{{eev.interviewee}} - {{eev.creationDate}}</a>
 				<a ng-if="!!eev.interviewee == false" href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.html">Vendeur inconnu - {{eev.creationDate}}</a>
-				&nbsp;<a href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.pdf" target="_blank">pdf</a>
+				&nbsp;<a href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.pdf" target="_blank"><img alt="pdf" src="${resource(dir: 'images', file: 'pdfdownload.png')}" width="15px" height="auto"/></a>
 				</li>
 				<h4 ng-if="eevs.length == 0">Aucun listing</h4>
 			</ol>
