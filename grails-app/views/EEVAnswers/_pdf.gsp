@@ -11,7 +11,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
-  		<meta http-equiv="Content-Style-Type" content="text/css"/>
+  		<meta http-equiv="content-type" content="text/html"/>
 		<style type="text/css">
 article,
 aside,
@@ -1652,7 +1652,7 @@ th {
 
 .table {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .table > thead > tr > th,
@@ -1661,7 +1661,7 @@ th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  padding: 8px;
+  padding: 2px;
   line-height: 1.428571429;
   vertical-align: top;
   border-top: 1px solid #dddddd;
@@ -1695,7 +1695,7 @@ th {
 .table-condensed > thead > tr > td,
 .table-condensed > tbody > tr > td,
 .table-condensed > tfoot > tr > td {
-  padding: 5px;
+  padding: 2px;
 }
 
 .table-bordered {
@@ -1813,7 +1813,7 @@ table th[class*="col-"] {
 @media (max-width: 767px) {
   .table-responsive {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 2px;
     overflow-x: scroll;
     overflow-y: hidden;
     border: 1px solid #dddddd;
@@ -1868,7 +1868,7 @@ legend {
   display: block;
   width: 100%;
   padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   font-size: 21px;
   line-height: inherit;
   color: #333333;
@@ -1989,7 +1989,7 @@ textarea.form-control {
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 2px;
 }
 
 .radio,
@@ -1997,8 +1997,8 @@ textarea.form-control {
   display: block;
   min-height: 20px;
   padding-left: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
   vertical-align: middle;
 }
 
@@ -2055,7 +2055,7 @@ fieldset[disabled] .checkbox-inline {
 }
 
 .input-sm {
-  height: 30px;
+  height: 15px;
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
@@ -2211,7 +2211,7 @@ textarea.input-lg {
 .form-horizontal .checkbox,
 .form-horizontal .radio-inline,
 .form-horizontal .checkbox-inline {
-  padding-top: 7px;
+  padding-top: 2px;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -4187,7 +4187,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-tabs.nav-justified > li > a {
-  margin-bottom: 5px;
+  margin-bottom: 2px;
   text-align: center;
 }
 
@@ -4329,7 +4329,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   border: 1px solid transparent;
 }
 
@@ -4547,7 +4547,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-nav > li > a {
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 2px;
   line-height: 20px;
 }
 
@@ -4949,7 +4949,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pagination > li > span {
   position: relative;
   float: left;
-  padding: 6px 12px;
+  padding: 2px 5px;
   margin-left: -1px;
   line-height: 1.428571429;
   text-decoration: none;
@@ -5005,7 +5005,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pagination-lg > li > a,
 .pagination-lg > li > span {
   padding: 10px 16px;
-  font-size: 18px;
+  font-size: 8px;
 }
 
 .pagination-lg > li:first-child > a,
@@ -5522,27 +5522,27 @@ a.thumbnail.active {
 
 .list-group {
   padding-left: 0;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .list-group-item {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 2px 0px;
   margin-bottom: -1px;
   background-color: #ffffff;
   border: 1px solid #dddddd;
 }
 
 .list-group-item:first-child {
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  /* border-top-right-radius: 4px; */
+  /* border-top-left-radius: 4px; */
 }
 
 .list-group-item:last-child {
   margin-bottom: 0;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  /* border-bottom-right-radius: 4px; */
+  /* border-bottom-left-radius: 4px; */
 }
 
 .list-group-item > .badge {
@@ -5590,16 +5590,16 @@ a.list-group-item.active:focus .list-group-item-text {
 
 .list-group-item-heading {
   margin-top: 0;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
 .list-group-item-text {
   margin-bottom: 0;
-  line-height: 1.3;
+  line-height: 1;
 }
 
 .panel {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   background-color: #ffffff;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -5608,7 +5608,7 @@ a.list-group-item.active:focus .list-group-item-text {
 }
 
 .panel-body {
-  padding: 15px;
+  padding: 2px;
 }
 
 .panel-body:before,
@@ -5723,10 +5723,10 @@ a.list-group-item.active:focus .list-group-item-text {
 }
 
 .panel-heading {
-  padding: 10px 15px;
+  padding: 2px 2px;
   border-bottom: 1px solid transparent;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  /* border-top-right-radius: 3px; */
+  /* border-top-left-radius: 3px; */
 }
 
 .panel-heading > .dropdown .dropdown-toggle {
@@ -5736,7 +5736,7 @@ a.list-group-item.active:focus .list-group-item-text {
 .panel-title {
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 16px;
+  font-size: 10px;
   color: inherit;
 }
 
@@ -5755,11 +5755,11 @@ a.list-group-item.active:focus .list-group-item-text {
 .panel-group .panel {
   margin-bottom: 0;
   overflow: hidden;
-  border-radius: 4px;
+  /* border-radius: 4px; */
 }
 
 .panel-group .panel + .panel {
-  margin-top: 5px;
+  margin-top: 2px;
 }
 
 .panel-group .panel-heading {
@@ -7223,28 +7223,18 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
 		</style>
 	</head>
 	<body>
-		<div class="container">
+		<div style="width: 750px;">
 		<div class="row">
 			<div class="col-xs-12">
-				<h3><%=eev.eevQuestions.title%></h3>
-				<form role="form">
-				<div class="form-group">
-				  <label for="interviewer">Email Manager</label>
-				  <div>
-				  	<input type="text" class="form-control" id="interviewer" placeholder="Email Manager" value="<%=eev.interviewer %>"/>
-				  </div>
-				</div>
-				</form>
+				<h5><%=eev.eevQuestions.title%></h5>
 			</div>
 			<div class="col-xs-12">
-				<form role="form">
-				<div class="form-group">
-				  <label for="interviewee">Email Vendeur</label>
-				  <div>
-				  	<input type="text" class="form-control" id="interviewee" placeholder="Email Vendeur" value="<%=eev.interviewee%>" />
-				  </div>
-				</div>
-				</form>
+				  <span style="border: 1px; font-size: 8px;">Email Manager:&nbsp;</span>
+				  <span style="border: 1px; font-size: 8px;">${eev.interviewer}</span>
+			</div>
+			<div class="col-xs-12">
+				  <span style="border: 1px; font-size: 8px;">Email Vendeur:&nbsp;</span>
+				  <span style="border: 1px; font-size: 8px;">${eev.interviewee}</span>
 			</div>
 		</div>
 		<div class="row">
@@ -7252,35 +7242,16 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
 				<g:each in="${eev.eevQuestions.contents.sort{it.rank}}" var="group" status="index">
 				<div class="panel panel-primary">
 				<div class="panel-heading">
-					<div class="col-xs-9 col-md-12">${group.title}</div>
-      			<div class="clearfix"></div>
+					<h3 class=" panel-title">${group.title}</h3>
 				</div>
 					<div class="panel-body">
 						<div class="list-group col-xs-12 col-xs-12">
 						<div class="row">
-							<div class="col-xs-6">
-						 		<div class="panel panel-default">
-							 		<div class="panel-heading panel-title">Points forts</div>
-							 		<div class="panel-body">
-								 		<form role="form" style="height: 100%;">
-								 			<div class="form-group">
-									 			<textarea class="form-control">${eev.answers.find{a -> a.question.id == group.strengthsQuestion.id}?.answer}</textarea>
-								 			</div>
-								 		</form>
-							 		</div>
-						 		</div>
+							<div class="col-xs-12" style="border: 1px; font-size: 8px;">
+								Points faibles: ${eev.answers.find{a -> a.question.id == group.weaknessesQuestion.id}?.answer}
 							</div>
-						 	<div class="col-xs-6">
-						 		<div class="panel panel-default">
-							 		<div class="panel-heading panel-title">Points faibles</div>
-							 		<div class="panel-body">
-								 		<form role="form" style="height: 100%;">
-								 			<div class="form-group">
-									 			<textarea class="form-control">${eev.answers.find{a -> a.question.id == group.weaknessesQuestion.id}?.answer}</textarea>
-								 			</div>
-								 		</form>
-							 		</div>
-						 		</div>
+							<div class="col-xs-12" style="border: 1px; font-size: 8px;">
+								Points forts: ${eev.answers.find{a -> a.question.id == group.strengthsQuestion.id}?.answer}
 							</div>
 						</div>
 						<%
@@ -7296,26 +7267,24 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
                                 }
                             }
             			 %>
+            			<div class="list-group">
 						<g:each in="${flattenedRows}" var="content" status="jindex">
-						 <a class="row list-group-item">
+						<a class="list-group-item">
 						 	<g:if test="${ content.hasProperty('contents')}">
-						 	<div class="col-xs-12"><span>${content.title}</span></div>
+						 	<span style="font-size: 10px;">${content.title}</span>
 						 	</g:if>
 						 	<g:else>
-							<div class="col-xs-12 col-sm-6">
-								<span class="${flattenedIds.contains(content.id)?'margin':''}">${content.question.question}</span>
-							</div>
-							<div ng-hide="content.flattened" class="col-xs-12 col-sm-6">
-								<div class="btn-group pull-right">
+								<span class="${flattenedIds.contains(content.id)?'margin':''}" style="font-size: 8px;">${content.question.question}</span>
+								<span class="pull-right">
 									<g:each in="${3..0}" var="faceIndex">
 									<% def answerIndex = eev.answers.find{a -> a.question.id == content.question.id}?.answer %>
-									<button class="btn face face-${answerIndex && new Integer(answerIndex) == faceIndex? 'active': 'inactive'}-${faceIndex}" ></button>
+									<img src="${resource(dir:'images')}/face-${answerIndex && new Integer(answerIndex) == faceIndex? 'active': 'inactive'}-${faceIndex}.png" width="15px" height="auto" />
 									</g:each>
-								</div>
-							</div>
+								</span>
 							</g:else>
 						 </a>
 						</g:each>
+						</div>
 						 </div>
 					</div>
 				</div>

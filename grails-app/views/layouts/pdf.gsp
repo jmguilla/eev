@@ -6,13 +6,6 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"><!--<![endif]-->
 	<head>
-  		<meta http-equiv="Content-Style-Type" content="text/css"/>
-  		<style type="text/css">
-		@media all {
-	  		<link rel="stylesheet" type="text/css" href="${resource(dir:'js/lib/bootstrap-3.0.3/css',file:'bootstrap.css')}"/>
-  			<link rel="stylesheet" type="text/css" href="${resource(dir:'css',file:'main.css')}"/>
-		}
-		</style>
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>
