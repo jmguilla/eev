@@ -11,19 +11,11 @@
 <div ng-if="!!eev == true" class="row slide">
 	<div class="col-xs-12">
 		<h3>{{eev.title}}</h3>
-		<form role="form">
-		<div class="form-group">
-		  <label for="interviewer">Email Manager</label>
-		  <div>
-		  	<input ng-model="$parent.interviewer" type="text" class="form-control" id="interviewer" placeholder="Email Manager"/>
-		  </div>
-		</div>
-		</form>
 	</div>
 	<div class="col-xs-12">
 		<form role="form">
 		<div class="form-group">
-		  <label for="interviewee">Email Vendeur</label>
+		  <label for="interviewee">Vendeur</label>
 		  <div>
 		  	<input ng-model="$parent.interviewee" type="text" class="form-control" id="interviewee" placeholder="Email Vendeur" />
 		  </div>
