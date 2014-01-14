@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8" />
+		<meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
 		<meta name="layout" content="main"/>
 		<title>Gestion des EEVs</title>
 		<r:require module="angular_app"/>

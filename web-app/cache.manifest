@@ -1,6 +1,7 @@
 CACHE MANIFEST
 # v0.1
 #direct db
+/eev/
 /eev/EEVQuestions/show/1
 /eev/EEVQuestions/get/1.json
 /eev/EEVAnswers/list/
@@ -24,9 +25,9 @@ CACHE MANIFEST
 /eev/static/bundle-bundle_angular_app_defer.js
 /eev/static/plugins/jquery-1.10.2/js/jquery/jquery-1.10.2.min.js
 
+NETWORK:
+*
+
 FALLBACK:
 /eev/user/widgets.json /eev/user/widgetsOffline.json
 /eev/EEVAnswers/list.json /eev/EEVAnswers/listOffline.json
-
-NETWORK:
-*
