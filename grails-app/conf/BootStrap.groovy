@@ -22,8 +22,7 @@ class BootStrap {
       new Role(authority: "ROLE_USER").save(failOnError: true)
     }
     if(User.count() < 2){
-      UserRole.create(new User(username: "jmguilla", password: "jmguilla", email: "guillauj@gmail.com").save(failOnError: true), admin)
-      UserRole.create(new User(username: "adifolco", password: "aD1f0l6o", email: "anthonydifolco@gmail.com").save(failOnError: true), admin)
+      //should create default users here
     }
     if(EEVQuestions.count() < 1){
       EEVQuestions eevTemplate = new EEVQuestions(title: 'Ecoute d\'entretien de vente')
