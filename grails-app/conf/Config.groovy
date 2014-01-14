@@ -139,6 +139,7 @@ log4j = {
 
 
 // Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = "/${appName}"
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.jmguilla.eev.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.jmguilla.eev.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.jmguilla.eev.Role'
