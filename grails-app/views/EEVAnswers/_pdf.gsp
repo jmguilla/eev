@@ -7229,11 +7229,7 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
 				<h5><%=eev.eevQuestions.title%></h5>
 			</div>
 			<div class="col-xs-12">
-				  <span style="border: 1px; font-size: 8px;">Email Manager:&nbsp;</span>
-				  <span style="border: 1px; font-size: 8px;">${eev.interviewer}</span>
-			</div>
-			<div class="col-xs-12">
-				  <span style="border: 1px; font-size: 8px;">Email Vendeur:&nbsp;</span>
+				  <span style="border: 1px; font-size: 8px;">Vendeur:&nbsp;</span>
 				  <span style="border: 1px; font-size: 8px;">${eev.interviewee}</span>
 			</div>
 		</div>

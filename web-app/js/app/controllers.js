@@ -38,6 +38,13 @@ app.controller('UserAccountCtrl', function($scope, $sce, User) {
 });
 
 app.controller('EEVAnswersListCtrl', function($scope, EEVAnswers) {
+	$scope.predicate = 'synced';
+	$scope.reverse = 'true';
+	$scope.deleteEEV = function(eev){
+		if(confirm("Supprimer?")){
+			EEVAnswers.deleteEEV(eev, $scope);
+		}
+	};
 	EEVAnswers.loadLists($scope);
 });
 

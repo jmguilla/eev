@@ -139,7 +139,7 @@ log4j = {
 
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.successHandler.defaultTargetUrl = "/${appName}"
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/${appName}"
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.jmguilla.eev.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.jmguilla.eev.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.jmguilla.eev.Role'
@@ -153,6 +153,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
   '/user/index/**':                 ['permitAll'],
   '/EEVQuestions/show/**':          ['permitAll'],
   '/EEVQuestions/get/**':           ['permitAll'],
+  '/EEVAnswers/deleteEEV/**':       ['ROLE_OWNER'],
   '/EEVAnswers/answer/**':          ['permitAll'],
   '/EEVAnswers/**':                 ['ROLE_OWNER'],
   '/index':                         ['permitAll'],

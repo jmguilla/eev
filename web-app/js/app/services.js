@@ -64,6 +64,16 @@ factory('EEVAnswers', function($resource){
   			'Accept': 'application/json'
   		}
   	},
+  	deleteEEV:{
+  		method: 'DELETE',
+  		params:{
+  			actionId: 'deleteEEV'
+  		},
+  		headers: {
+  			'Content-Type': 'application/json',
+  			'Accept': 'application/json'
+  		}
+  	},
   	list:{
   		method: 'GET',
   		params:{
@@ -71,7 +81,8 @@ factory('EEVAnswers', function($resource){
   		},
   		headers: {
   			'Content-Type': 'application/json',
-  			'Accept': 'application/json'
+  			'Accept': 'application/json',
+  			'X-Requested-With': 'XMLHttpRequest'
   		},
   		isArray: true
   	}
@@ -132,6 +143,8 @@ factory('EEVAnswers', function($resource){
 			}else{
 				pendingAnswers = [];
 			}
+			// setting index for potential futur removal by user
+			eev.index = pendingAnswers.length;
 			pendingAnswers.push(eev);
 			localStorage.answers = JSON.stringify(pendingAnswers);
 		};
@@ -143,7 +156,6 @@ factory('EEVAnswers', function($resource){
 				scope.answers = {};
 				scope.interviewer = '';
 				scope.interviewee = '';
-				this.sync(scope, this);
 			}, function(httpResponse) {
 				storeLocally();
 				scope.eevSubmitting = false;
@@ -165,18 +177,26 @@ factory('EEVAnswers', function($resource){
 	 */
 	eevAnswersService.loadLists = function(scope){
 	//loading those available from remote server
+	scope.eevs = [];
 	if(navigator.onLine){
 		this.resource.list({},
 			function(data, headers){
-				scope.eevs = data;
+				for(var index = 0 ; index < data.length; index++){
+					data[index].synced = true;
+				}
+				scope.eevs = scope.eevs.concat(data);
 			},
 			function(httpResponse){
 				//status == 0 means fetching of the resource failed
 				if(httpResponse.status){
-					if (httpResponse.data.type != undefined) {
-						scope.alerts.push(httpResponse.data);
+					if(httpResponse.status == 401){
+						scope.alerts.push({type: 'warning', content: 'Pour voir les EEV synchronisés, connectez vous.'});
 					}else{
-						scope.alerts.push({type: 'danger', content: 'Un problème inconnu s\'est produit: ' + httpResponse.data});
+						if (httpResponse.data.type != undefined) {
+							scope.alerts.push(httpResponse.data);
+						}else{
+							scope.alerts.push({type: 'danger', content: 'Un problème inconnu s\'est produit: ' + httpResponse.data});
+						}
 					}
 				}
 			});
@@ -185,9 +205,7 @@ factory('EEVAnswers', function($resource){
 	//check if some are pending
 	var pendingAnswers = localStorage.answers;
 	if(!!pendingAnswers == true){
-		scope.pendingEevs = JSON.parse(pendingAnswers);
-	}else{
-		scope.pendingEevs = [];
+		scope.eevs = scope.eevs.concat(JSON.parse(pendingAnswers));
 	}
 	
 	//triggering sync in any case
@@ -213,5 +231,53 @@ factory('EEVAnswers', function($resource){
 		//triggering sync in any case
 		this.sync(scope, this);
 	};
+	
+	eevAnswersService.deleteEEV = function(eev, scope){
+		scope.syncing = true;
+		if(!!eev.id == true && eev.synced){
+			// remote removal
+			this.resource.deleteEEV({eevAnswersId: eev.id},
+					function(data, headers){
+						scope.alerts.push(data)
+						for(var index in scope.eevs){
+							if(scope.eevs[index].id == eev.id){
+								scope.eevs.splice(index, 1);
+								break;
+							}
+						}
+						scope.syncing = false;
+					},
+					function(httpResponse){
+						if(httpResponse.data.type != undefined){
+							scope.alerts.push(httpResponse.data)
+						}else{
+							scope.alerts.push({type: 'danger', content: 'Suppression impossible: ' + httpResponse})
+						}
+						scope.syncing = false;
+					});
+		}else{
+			// local removal
+			if(!!eev.index == true){
+				//this is an error, should have been set during local storing process
+				scope.alerts.push({type: 'danger', content: 'Suppression impossible, pas d\'index associé.'})
+				scope.syncing = false;
+			}else{
+				var pendingAnswers = localStorage.answers;
+				if(!!pendingAnswers == true){
+					pendingAnswers = JSON.parse(pendingAnswers);
+					pendingAnswers.splice(eev.index, 1);
+					for(var index in scope.eevs){
+						if(scope.eevs[index].index == eev.index){
+							scope.eevs.splice(index, 1);
+							break;
+						}
+					}
+					localStorage.answers = JSON.stringify(pendingAnswers);
+				}
+				scope.syncing = false;
+			}
+		}
+	};
+	
 	return eevAnswersService;
 });

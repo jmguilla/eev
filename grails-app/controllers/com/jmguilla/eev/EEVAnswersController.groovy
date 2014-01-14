@@ -17,6 +17,10 @@ class EEVAnswersController {
       html{
       }
       json{
+        if(!request.xhr && params.format.equalsIgnoreCase("json")){
+          redirect action: 'list'
+          return
+        }
         def result = EEVAnswers.executeQuery('select a from EEVAnswers a inner join fetch a.eevQuestions as eevQuestions order by eevQuestions.id, a.creationDate')
         JSON.use('answersList'){ render(result as JSON) }
       }
@@ -95,8 +99,8 @@ class EEVAnswersController {
           response.sendError(400, "Aucun EEV ne correspond a cet id: ${params.id}")
           return
         }
-//        renderPdf(template: "pdf", model: [eev: eev], filename: "${eev.interviewee}-${eev.id}.pdf")
-          render(view: "_pdf", model: [eev: eev], filename: "eev-${eev.id}")
+        //        renderPdf(template: "pdf", model: [eev: eev], filename: "${eev.interviewee}-${eev.id}.pdf")
+        render(view: "_pdf", model: [eev: eev], filename: "eev-${eev.id}")
       }
       html{
         if(!params.id){
@@ -109,6 +113,26 @@ class EEVAnswersController {
         respond([type: "danger", content:"Only html / json method are allowed for edition."])
       }
     }
+  }
+
+  @Secured(['ROLE_ADMIN'])
+  @Transactional
+  def deleteEEV(){
+    if(!request.method.equalsIgnoreCase('DELETE')){
+      response.status = 400
+      respond([type: 'danger', content: 'Seulement la méthode DELETE est authorisée.'])
+    }
+    if(!params.id){
+      response.status = 400
+      respond([type: 'danger', content: 'Un id doit être fourni pour la suppression.'])
+    }
+    def eev = EEVAnswers.get(params.id)
+    if(!eev){
+      response.status = 404
+      respond([type: 'danger', content: "Aucun EEV ne correspond à l\'id ${params.id}"])
+    }
+    eev.delete()
+      respond([type: 'success', content: "L\'EEV #${params.id} a été supprimé."])
   }
 
   @Secured(['ROLE_ADMIN'])
