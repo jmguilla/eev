@@ -13,7 +13,7 @@ environments {
       driverClassName = "org.h2.Driver"
       username = "sa"
       password = ""
-      dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+//      dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
       url = "jdbc:h2:file:~/h2db/devDb.h2;MVCC=TRUE;LOCK_TIMEOUT=10000"
     }
   }
