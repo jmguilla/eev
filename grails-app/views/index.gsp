@@ -6,7 +6,6 @@
 		<meta name="apple-mobile-web-app-capable" content="yes"/>
 		<meta name="layout" content="main"/>
 		<title>Gestion des EEVs</title>
-		<r:require module="angular_app"/>
 	</head>
 	<body>
 		<g:render template="/shared/nav"/>

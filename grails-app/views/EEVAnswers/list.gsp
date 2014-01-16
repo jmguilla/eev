@@ -5,8 +5,6 @@
 	<head>
 		<meta name="layout" content="main">
 		<title>List des EEV</title>
-		<r:require module="angular_app"/>
-		<r:require module="bootstrap"/>
 	</head>
 	<body>
 		<g:render template="/shared/nav"/>

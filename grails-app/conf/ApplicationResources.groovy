@@ -17,13 +17,14 @@ modules = {
   angular_app {
     dependsOn 'angular'
     dependsOn 'bootstrap_ui'
-    resource url:'js/app/services.js'
-    resource url:'js/app/app.js'
-    resource url:'js/app/filters.js'
-    resource url:'js/app/controllers.js'
-    resource url:'js/app/config.js'
+    resource id: 'services', url:'js/app/services.js'
+    resource id: 'app', url:'js/app/app.js'
+    resource id: 'filters', url:'js/app/filters.js'
+    resource id: 'controllers', url:'js/app/controllers.js'
+    resource id: 'config', url:'js/app/config.js'
+    resource id: 'waterbug', url:'js/app/waterbug_prod.js'
   }
-
+  
   //bootstrap and css
   bootstrap_switch {
     dependsOn 'bootstrap'
