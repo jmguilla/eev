@@ -155,6 +155,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
   '/EEVQuestions/get/**':           ['permitAll'],
   '/EEVAnswers/deleteEEV/**':       ['ROLE_OWNER'],
   '/EEVAnswers/answer/**':          ['permitAll'],
+  '/EEVAnswers/list/**':            ['permitAll'],
+  '/EEVAnswers/offline/**':        ['permitAll'],
   '/EEVAnswers/**':                 ['ROLE_OWNER'],
   '/index':                         ['permitAll'],
   '/index.gsp':                     ['permitAll'],

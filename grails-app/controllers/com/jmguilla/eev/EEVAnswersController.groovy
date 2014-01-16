@@ -10,12 +10,13 @@ class EEVAnswersController {
   def EEVQuestionsService
   def EEVAnswersServicelean
 
-  @Transactional(readOnly = true)
-  @Secured(['ROLE_ADMIN'])
   def list(){
+  }
+
+  @Transactional(readOnly = true)
+  @Secured(['ROLE_OWNER'])
+  def listJSON(){
     withFormat{
-      html{
-      }
       json{
         if(!request.xhr && params.format.equalsIgnoreCase("json")){
           redirect action: 'list'
@@ -27,8 +28,12 @@ class EEVAnswersController {
     }
   }
 
-  def listOffline(){
-    render([] as JSON)
+  def offline(){
+    withFormat{
+      json{
+        render([] as JSON)
+      }
+    }
   }
 
   @Transactional
@@ -132,7 +137,7 @@ class EEVAnswersController {
       respond([type: 'danger', content: "Aucun EEV ne correspond à l\'id ${params.id}"])
     }
     eev.delete()
-      respond([type: 'success', content: "L\'EEV #${params.id} a été supprimé."])
+    respond([type: 'success', content: "L\'EEV #${params.id} a été supprimé."])
   }
 
   @Secured(['ROLE_ADMIN'])

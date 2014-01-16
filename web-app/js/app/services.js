@@ -77,7 +77,7 @@ factory('EEVAnswers', function($resource){
   	list:{
   		method: 'GET',
   		params:{
-  			actionId: 'list'
+  			actionId: 'listJSON'
   		},
   		headers: {
   			'Content-Type': 'application/json',

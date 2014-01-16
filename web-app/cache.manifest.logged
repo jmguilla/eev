@@ -30,4 +30,4 @@ NETWORK:
 
 FALLBACK:
 /eev/user/widgets.json /eev/user/widgetsOffline.json
-/eev/EEVAnswers/listJSON.json /eev/EEVAnswers/offline/listJSON.json
+/eev/EEVAnswers/list.json /eev/EEVAnswers/listOffline.json
