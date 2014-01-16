@@ -17,6 +17,9 @@ CACHE MANIFEST
 /eev/static/images/faces.active.png
 /eev/static/images/faces.png
 /eev/static/plugins/twitter-bootstrap-3.0.2/fonts/glyphicons-halflings-regular.woff
+/eev/static/images/icons/apple-touch-icon-57x57.png
+/eev/static/images/icons/apple-touch-icon-72x72.png
+/eev/static/images/icons/apple-touch-icon-114x114.png
 
 #js
 /eev/static/bundle-bundle_bootstrap_defer.js

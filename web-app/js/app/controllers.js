@@ -5,6 +5,36 @@ app.controller('MainCtrl', function($scope, $sce, User) {
 	$scope.syncing = false;
 	$scope.synced = false;
 	$scope.init = function(){
+		//for caching purposes
+
+    function logEvent(event) {
+    	console.log(event);
+    }
+		
+		function syncingBegins(event){
+			logEvent('Begining synchronization');
+			logEvent(event);
+			$scope.syncing = true;
+		}
+		
+		function syncingEnds(event){
+			logEvent('Finishing synchronization');
+			logEvent(event);
+			$scope.syncing = false;
+		}
+   
+    window.applicationCache.addEventListener('checking',logEvent,false);
+    window.applicationCache.addEventListener('noupdate',logEvent,false);
+    window.applicationCache.addEventListener('downloading',syncingBegins,false);
+    window.applicationCache.addEventListener('cached',syncingEnds,false);
+    window.applicationCache.addEventListener('updateready',syncingEnds,false);
+    window.applicationCache.addEventListener('obsolete',logEvent,false);
+    window.applicationCache.addEventListener('error',syncingEnds,false);
+    
+    window.onerror = function(m,u,l){
+    	logEvent(m+"\n"+u+":"+l);
+    };
+		
 		User.widgets({},
 		function(data, headers){
 			$scope.userNavCollapsed = $sce.trustAsHtml(data.navCollapsed);
