@@ -20,11 +20,11 @@
 				<td></td>
 			</tr>
 			<tr ng-repeat="eev in eevs|orderBy:predicate:reverse">
-				<td>{{$index}}</td>
-				<td><a ng-if="eev.synced" href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.pdf" target="_blank"><img alt="pdf" src="${resource(dir: 'images', file: 'pdfdownload.png')}" width="15px" height="auto"/></a></td>
+				<td><a ng-if="eev.synced" href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.html">{{$index}}</a></td>
+				<td><a ng-if="eev.synced" href="#" ng-click="sendPDF(eev.id)"><img alt="pdf" src="${resource(dir: 'images', file: 'pdfdownload.png')}" width="15px" height="auto"/></a></td>
 				<td><span ng-if="eev.synced" style="color: #3c763d;" class="glyphicon glyphicon-ok"></span></td>
-				<td><span ng-if="!!eev.interviewee == true">{{eev.interviewee}}</span><span ng-if="!!eev.interviewee == false">Inconnu</span></a></td>
-				<td>{{eev.creationDate|date:'yyyy-MM-dd'}}</td>
+				<td><a ng-if="eev.synced" href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.html"><span ng-if="!!eev.interviewee == true">{{eev.interviewee}}</span><span ng-if="!!eev.interviewee == false">Inconnu</span></a></td>
+				<td><a ng-if="eev.synced" href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.html">{{eev.creationDate|date:'yyyy-MM-dd'}}</a></td>
 				<td><a href="#" ng-click="deleteEEV(eev)"><span class="glyphicon glyphicon-remove" class="glyphicon glyphicon-user" style="color: #a94442;"></a></span></td>
 			</tr>
 			</table>

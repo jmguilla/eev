@@ -1,3 +1,4 @@
+MailConfig.groovy
 facebook4j.properties
 *.db
 grails-app/conf/priv/**

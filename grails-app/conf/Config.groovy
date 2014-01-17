@@ -2,7 +2,9 @@
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
 
-// grails.config.locations = [ "classpath:${appName}-config.properties",
+grails.config.locations = [
+  "classpath:MailConfig.groovy"
+]
 //                             "classpath:${appName}-config.groovy",
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
@@ -108,7 +110,7 @@ grails.hibernate.cache.queries = false
 environments {
   development {
     grails.logging.jul.usebridge = true
-    grails.serverURL = "http://192.168.1.8:9090/${appName}"
+    grails.serverURL = "http://localhost:9090/${appName}"
   }
   production {
     grails.logging.jul.usebridge = false
@@ -139,7 +141,6 @@ log4j = {
 
 
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/${appName}"
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.jmguilla.eev.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.jmguilla.eev.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.jmguilla.eev.Role'
@@ -156,7 +157,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
   '/EEVAnswers/deleteEEV/**':       ['ROLE_OWNER'],
   '/EEVAnswers/answer/**':          ['permitAll'],
   '/EEVAnswers/list/**':            ['permitAll'],
-  '/EEVAnswers/offline/**':        ['permitAll'],
+  '/EEVAnswers/offline/**':         ['permitAll'],
+  '/EEVAnswers/sendPDF/**':         ['ROLE_OWNER'],
   '/EEVAnswers/**':                 ['ROLE_OWNER'],
   '/index':                         ['permitAll'],
   '/index.gsp':                     ['permitAll'],

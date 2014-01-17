@@ -5,12 +5,46 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
 
+
 class EEVAnswersController {
 
   def EEVQuestionsService
   def EEVAnswersServicelean
+  def springSecurityService
 
   def list(){
+  }
+
+  @Secured(['ROLE_OWNER'])
+  def sendPDF(){
+    withFormat{
+      json{
+        if(!request.xhr && params.format.equalsIgnoreCase("json")){
+          response.status = 400
+          respond([type: 'danger', content: 'L\'envoie de pdf n\'est possible qu\'en JSON/xhr.'])
+        }
+        if(!params.id){
+          response.status = 404
+          respond([type: 'danger', content: "L'id de l'EEV à envoyer est requis"])
+        }
+        EEVAnswers eev = EEVAnswers.get(params.id)
+        if(!eev){
+          response.status = 404
+          respond([type: 'danger', content: "Aucun EEV ne correspond à l'id ${params.id}"])
+        }
+        try{
+          sendMail {
+            to springSecurityService.getCurrentUser().email
+            subject "EEV #${params.id} du ${eev.creationDate} pour '${eev.interviewee?:'Inconnu'}'"
+            text "Consultable ici: ${g.createLink(controller: 'EEVAnswers', action: 'show', id: params.id)}.pdf Et présent en pièce jointe."
+          }
+          respond([type: 'success', content: 'Email envoyé'])
+        }catch(Throwable t){
+          response.status = 500
+          respond([type: 'danger', content: "Envoie d'email impossible en raison de: ${t.toString()}"])
+        }
+      }
+    }
   }
 
   @Transactional(readOnly = true)

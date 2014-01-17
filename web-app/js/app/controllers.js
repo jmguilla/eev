@@ -78,6 +78,9 @@ app.controller('EEVAnswersListCtrl', function($scope, EEVAnswers) {
 			EEVAnswers.deleteEEV(eev, $scope);
 		}
 	};
+	$scope.sendPDF = function(id){
+		EEVAnswers.sendPDF(id, $scope);
+	};
 	EEVAnswers.loadLists($scope);
 });
 

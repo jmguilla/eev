@@ -42,6 +42,7 @@ grails.project.dependency.resolution = {
     mavenLocal()
     grailsCentral()
     mavenCentral()
+    mavenRepo "http://download.java.net/maven/2/"
     mavenRepo "http://repo.spring.io/milestone/"
     // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
     //mavenRepo "http://repository.codehaus.org"
@@ -68,6 +69,7 @@ grails.project.dependency.resolution = {
     compile ":json-apis:0.9"
     compile ":rendering:0.4.4"
     compile ":html-cleaner:0.2"
+    compile ":mail:1.0.1"
 
     // plugins needed at runtime but not for compilation
     runtime ":hibernate:3.6.10.2" // or ":hibernate4:4.1.11.2"

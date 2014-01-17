@@ -74,6 +74,17 @@ factory('EEVAnswers', function($resource){
   			'Accept': 'application/json'
   		}
   	},
+  	sendPDF: {
+  		method: 'GET',
+  		params:{
+  			actionId: 'sendPDF'
+  		},
+  		headers: {
+  			'Content-Type': 'application/json',
+  			'Accept': 'application/json',
+  			'X-Requested-With': 'XMLHttpRequest'
+  		}
+  	},
   	list:{
   		method: 'GET',
   		params:{
@@ -277,6 +288,20 @@ factory('EEVAnswers', function($resource){
 				scope.syncing = false;
 			}
 		}
+	};
+	
+	eevAnswersService.sendPDF = function(id, scope){
+		this.resource.sendPDF({eevAnswersId: id},
+				function(data, headers){
+					scope.alerts.push(data)
+				},
+				function(httpResponse){
+					if(httpResponse.data.type != undefined){
+						scope.alerts.push(httpResponse.data)
+					}else{
+						scope.alerts.push({type: 'danger', content: 'Envoie impossible: ' + httpResponse})
+					}
+				});
 	};
 	
 	return eevAnswersService;
