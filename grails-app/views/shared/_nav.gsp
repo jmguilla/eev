@@ -8,12 +8,11 @@
       <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-home"></span></a>
-	<a ng-cloak ng-if="syncing == true" class="navbar-brand" href="#"><span class="glyphicon glyphicon-import" style="color: #8a6d3b;font-size: 14px;"></span></a>
-	<a ng-cloak ng-if="synced == true" class="navbar-brand" href="#"><span class="glyphicon glyphicon-import" style="color: #31708f;font-size: 14px;"></span></a>
-    
     <!-- Trick to appropriate rendering with collapsed navbar -->
 	<div ng-cloak class="btn-group navbar-nav pull-left" ng-bind-html="userNavCollapsed"></div>
 	<div ng-cloak class="btn-group navbar-nav pull-left" ng-bind-html="userNav"></div>
+	<a ng-cloak ng-if="syncing == true" class="navbar-brand" href="#"><span class="glyphicon glyphicon-import" style="color: #8a6d3b;font-size: 14px;"></span></a>
+	<a ng-cloak ng-if="synced == true" class="navbar-brand" href="#"><span class="glyphicon glyphicon-import" style="color: #31708f;font-size: 14px;"></span></a>
 
   </div>
 

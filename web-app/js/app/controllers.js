@@ -24,16 +24,19 @@ app.controller('MainCtrl', function($scope, $sce, User) {
 		}
    
     window.applicationCache.addEventListener('checking',logEvent,false);
-    window.applicationCache.addEventListener('noupdate',logEvent,false);
+    window.applicationCache.addEventListener('noupdate',syncingEnds,false);
     window.applicationCache.addEventListener('downloading',syncingBegins,false);
     window.applicationCache.addEventListener('cached',syncingEnds,false);
     window.applicationCache.addEventListener('updateready',syncingEnds,false);
-    window.applicationCache.addEventListener('obsolete',logEvent,false);
+    window.applicationCache.addEventListener('obsolete',syncingEnds,false);
     window.applicationCache.addEventListener('error',syncingEnds,false);
     
     window.onerror = function(m,u,l){
     	logEvent(m+"\n"+u+":"+l);
     };
+    
+    // $scope.userNavCollapsed = "<button ng-cloak type='button' class='btn navbar-btn btn-default dropdown-toggle hidden-sm hidden-md hidden-lg btn-dropdown-like no-collapse pull-left' data-toggle='dropdown'><span class='glyphicon glyphicon-refresh' style='color: #8a6d3b;'></span></button>";
+    // $scope.userNav          = "<button ng-cloak type='button' class='btn navbar-btn btn-default dropdown-toggle hidden-xs btn-dropdown-like pull-left' data-toggle='dropdown'><span class='glyphicon glyphicon-refresh' style='color: #8a6d3b;'></span></button>";
 		
 		User.widgets({},
 		function(data, headers){
