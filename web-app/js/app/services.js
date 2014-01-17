@@ -216,7 +216,11 @@ factory('EEVAnswers', function($resource){
 	//check if some are pending
 	var pendingAnswers = localStorage.answers;
 	if(!!pendingAnswers == true){
-		scope.eevs = scope.eevs.concat(JSON.parse(pendingAnswers));
+		var unsynced = JSON.parse(pendingAnswers);
+			for(var index = 0 ; index < unsynced.length; index++){
+				unsynced[index].synced = false;
+			}
+		scope.eevs = scope.eevs.concat(unsynced);
 	}
 	
 	//triggering sync in any case

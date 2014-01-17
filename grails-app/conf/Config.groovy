@@ -3,7 +3,7 @@
 // in the classpath in ConfigSlurper format
 
 grails.config.locations = [
-  "classpath:MailConfig.groovy"
+  "classpath:conf/mail-config.properties"
 ]
 //                             "classpath:${appName}-config.groovy",
 //                             "file:${userHome}/.grails/${appName}-config.properties",
@@ -179,5 +179,16 @@ environments {
   production {
     grails.plugin.databasemigration.updateOnStart = true
     grails.plugin.databasemigration.updateOnStartFileNames = ["changelog.groovy"]
+  }
+}
+
+grails{
+  mail{
+    host = "smtp.gmail.com"
+    port = 465
+    props = ["mail.smtp.auth":"true",
+      "mail.smtp.socketFactory.port":"465",
+      "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+      "mail.smtp.socketFactory.fallback":"false"]
   }
 }

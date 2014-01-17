@@ -1,4 +1,4 @@
-MailConfig.groovy
+mail-config.properties
 facebook4j.properties
 *.db
 grails-app/conf/priv/**
