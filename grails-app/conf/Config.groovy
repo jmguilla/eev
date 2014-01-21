@@ -3,7 +3,7 @@
 // in the classpath in ConfigSlurper format
 
 grails.config.locations = [
-  "classpath:conf/mail-config.properties"
+  "classpath:mail-config.properties"
 ]
 //                             "classpath:${appName}-config.groovy",
 //                             "file:${userHome}/.grails/${appName}-config.properties",
