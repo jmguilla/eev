@@ -15,17 +15,22 @@
 		<link rel="apple-touch-icon" sizes="57x57"   href="${resource(dir: 'images/icons', file: 'apple-touch-icon-57x57.png')}" />
 		<link rel="apple-touch-icon" sizes="72x72"   href="${resource(dir: 'images/icons', file: 'apple-touch-icon-72x72.png')}" />
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images/icons', file: 'apple-touch-icon-114x114.png')}" />
-		<!-- iPad -->
-		<!-- Portrait -->
-		<%--<link rel="apple-touch-startup-image" href="starts/ipad-768x1024.jpg" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" />
-		<link rel="apple-touch-startup-image" href="starts/ipad-1536x2048.jpg" media="screen and (min-device-width: 481px) and (max-device-width: 2048px) and (orientation:portrait)" />
-		<!-- Landscape -->
-		<link rel="apple-touch-startup-image" href="starts/ipad-landscape.jpg" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" />
-		<!-- For iPhone 5 and iPod touch (5th generation) -->
-		<link rel="apple-touch-startup-image" href="starts/iphone-640x1136.jpg" media="screen and (max-device-width: 640px) and (max-device-height: 1136px)" />
-		<!-- For other iPhone and iPod touch devices: -->
-		<link rel="apple-touch-startup-image" href="starts/iphone-640x960.jpg" media="screen and (max-device-width: 640px) and (max-device-height: 960px)" />
-		<link rel="apple-touch-startup-image" href="starts/iphone-320x480.jpg" media="screen and (max-device-width: 320px)" />--%>
+		<!-- iPhone -->
+		<link href="${resource(dir: 'images/start', file: 'apple-touch-startup-image-320x460.png')}" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+		<!-- iPhone (Retina) -->
+		<link href="${resource(dir: 'images/start', file: 'apple-touch-startup-image-640x920.png')}" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		<!-- iPhone 5 -->
+		<link href="${resource(dir: 'images/start', file: 'apple-touch-startup-image-640x1096.png')}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		<%--
+		<!-- iPad (portrait) -->
+		<link href="apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+		<!-- iPad (landscape) -->
+		<link href="apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+		<!-- iPad (Retina, portrait) -->
+		<link href="apple-touch-startup-image-1536x2008.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		<!-- iPad (Retina, landscape) -->
+		<link href="apple-touch-startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		--%>
 		<title><g:layoutTitle default="EEV"/></title>
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">

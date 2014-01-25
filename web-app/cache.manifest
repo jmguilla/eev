@@ -20,6 +20,9 @@ CACHE MANIFEST
 /eev/static/images/icons/apple-touch-icon-57x57.png
 /eev/static/images/icons/apple-touch-icon-72x72.png
 /eev/static/images/icons/apple-touch-icon-114x114.png
+/eev/static/images/start/apple-touch-startup-image-320x460.png
+/eev/static/images/start/apple-touch-startup-image-640x920.png
+/eev/static/images/start/apple-touch-startup-image-640x1096.png
 
 #js
 /eev/static/bundle-bundle_bootstrap_defer.js

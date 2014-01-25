@@ -1,5 +1,5 @@
 <div ng-if="!!eev == true" class="row">
-	<div ng-if="!!eev == true" class="col-xs-3 col-sm-3 col-md-12">
+	<div ng-if="!!eev == true" class="col-xs-3">
 		<button ng-disabled="eevSubmitting == true || eevDisabled == true" ng-if="eevSubmitting == false" ng-click="fill()" type="button" class="btn btn-default">Repondre</button>
 		<div ng-if="eevSubmitting == true" class="progress progress-striped active">
 		  <div class="progress-bar"  role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
@@ -7,7 +7,7 @@
 		  </div>
 		</div>
 	</div>
-	<div ng-if="!!eev == true" class="col-xs-9 col-sm-9 col-md-12">
+	<div ng-if="!!eev == true" class="col-xs-9">
 		<form role="form">
 		<div class="form-group">
 		  <div class="col-xs-12">
