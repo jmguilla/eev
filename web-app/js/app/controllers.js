@@ -10,13 +10,17 @@ app.controller('MainCtrl', function($scope, $sce, User) {
 	}
 	
 	function syncingBegins(event){
-		$scope.syncing = true;
+		$scope.$apply(function(){
+      $scope.syncing = true;
+		});
 		logEvent('Begining synchronization');
 		logEvent(event);
 	}
 	
 	function syncingEnds(event){
-		$scope.syncing = false;
+		$scope.$apply(function(){
+      $scope.syncing = false;
+		});
 		logEvent('Finishing synchronization');
 		logEvent(event);
 	}
