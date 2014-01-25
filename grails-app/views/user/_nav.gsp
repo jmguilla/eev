@@ -9,6 +9,6 @@
 <g:else>
 <button type="button" class="btn navbar-btn btn-default dropdown-toggle hidden-xs btn-dropdown-like pull-left" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style="color: #a94442;"></span></button>
 <ul class="dropdown-menu" role="menu">
-  <li><a class="btn navbar-btn" href="${createLink(controller: 'login', action: 'auth', absolute: true)}">Login</a></li>
+  <li><a class="btn navbar-btn" href="${createLink(controller: 'login', action: 'auth')}">Login</a></li>
 </ul>
 </g:else>

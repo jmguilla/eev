@@ -751,7 +751,7 @@ a.list-group-item.active:focus .list-group-item-text {
 }
 
 .panel {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   background-color: #ffffff;
   border: 1px solid transparent;
   border-radius: 4px;

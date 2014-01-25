@@ -21,7 +21,7 @@ class BootStrap {
       new Role(authority: "ROLE_OWNER").save(failOnError: true)
       new Role(authority: "ROLE_USER").save(failOnError: true)
     }
-    if(User.count() < 2){
+    if(User.count() < 1){
       UserRole.create(new User(username: "jmguilla", password: "jmguilla", email: "guillauj@gmail.com").save(failOnError: true), admin)
     }
     if(EEVQuestions.count() < 1){

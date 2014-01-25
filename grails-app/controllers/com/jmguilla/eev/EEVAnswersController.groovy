@@ -11,6 +11,7 @@ class EEVAnswersController {
   def EEVQuestionsService
   def EEVAnswersServicelean
   def springSecurityService
+  def pdfRenderingService
 
   def list(){
   }
@@ -25,21 +26,25 @@ class EEVAnswersController {
         }
         if(!params.id){
           response.status = 404
-          respond([type: 'danger', content: "L'id de l'EEV à envoyer est requis"])
+          respond([type: 'danger', content: "L'id de l'EEV ï¿½ envoyer est requis"])
         }
         EEVAnswers eev = EEVAnswers.get(params.id)
         if(!eev){
           response.status = 404
-          respond([type: 'danger', content: "Aucun EEV ne correspond à l'id ${params.id}"])
+          respond([type: 'danger', content: "Aucun EEV ne correspond Ã  l'id ${params.id}"])
         }
         try{
           sendMail {
+            multipart true
+            from "Ecoute Entretien Vente <ecoute.entretien.vente@gmail.com>"
             to springSecurityService.getCurrentUser().email
             subject "EEV #${params.id} du ${eev.creationDate} pour '${eev.interviewee?:'Inconnu'}'"
-            text "Consultable ici: ${g.createLink(controller: 'EEVAnswers', action: 'show', id: params.id)}.pdf Et présent en pièce jointe."
+            html "<a href=\"${g.createLink(controller: 'EEVAnswers', action: 'show', id: params.id, absolute: true)}.pdf\">Consultable ici </a> et pr&eacute;sent en pi&egrave;ce jointe."
+            attach ("${eev.interviewee?:'inconnu'}-${eev.id}.pdf", "application/pdf", pdfRenderingService.render(template: "/EEVAnswers/pdf", model: [eev: eev]).toByteArray())
           }
-          respond([type: 'success', content: 'Email envoyé'])
+          respond([type: 'success', content: 'Email envoyÃ©'])
         }catch(Throwable t){
+          log.error(t)
           response.status = 500
           respond([type: 'danger', content: "Envoie d'email impossible en raison de: ${t.toString()}"])
         }
@@ -138,8 +143,8 @@ class EEVAnswersController {
           response.sendError(400, "Aucun EEV ne correspond a cet id: ${params.id}")
           return
         }
-        //        renderPdf(template: "pdf", model: [eev: eev], filename: "${eev.interviewee}-${eev.id}.pdf")
-        render(view: "_pdf", model: [eev: eev], filename: "eev-${eev.id}")
+        renderPdf(template: "pdf", model: [eev: eev], filename: "${eev.interviewee?:'inconnu'}-${eev.id}.pdf")
+        //        render(view: "_pdf", model: [eev: eev], filename: "eev-${eev.id}")
       }
       html{
         if(!params.id){
