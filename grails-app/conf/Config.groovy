@@ -116,7 +116,7 @@ environments {
     grails.plugin.springsecurity.secureChannel.definition = [
       '/**':  'REQUIRES_SECURE_CHANNEL'
     ]
-//    grails.plugin.springsecurity.secureChannel.useHeaderCheckChannelSecurity = true
+    //    grails.plugin.springsecurity.secureChannel.useHeaderCheckChannelSecurity = true
     grails.plugin.springsecurity.auth.forceHttps = true
   }
   production {
@@ -127,8 +127,12 @@ environments {
     grails.plugin.springsecurity.secureChannel.definition = [
       '/**':  'REQUIRES_SECURE_CHANNEL'
     ]
-//    grails.plugin.springsecurity.secureChannel.useHeaderCheckChannelSecurity = true
+    grails.plugin.springsecurity.secureChannel.useHeaderCheckChannelSecurity = true
     grails.plugin.springsecurity.auth.forceHttps = true
+    grails.plugin.springsecurity.secureChannel.secureHeaderName = 'X-Forwarded-Proto'
+    grails.plugin.springsecurity.secureChannel.secureHeaderValue = 'http'
+    grails.plugin.springsecurity.secureChannel.insecureHeaderName = 'X-Forwarded-Proto'
+    grails.plugin.springsecurity.secureChannel.insecureHeaderValue = 'https'
   }
 }
 
