@@ -111,10 +111,24 @@ environments {
   development {
     grails.logging.jul.usebridge = true
     grails.serverURL = "http://192.168.1.8:9090/${appName}"
+    grails.plugin.springsecurity.portMapper.httpPort = 9090
+    grails.plugin.springsecurity.portMapper.httpsPort = 18443
+    grails.plugin.springsecurity.secureChannel.definition = [
+      '/**':  'REQUIRES_SECURE_CHANNEL'
+    ]
+//    grails.plugin.springsecurity.secureChannel.useHeaderCheckChannelSecurity = true
+    grails.plugin.springsecurity.auth.forceHttps = true
   }
   production {
     grails.logging.jul.usebridge = false
     grails.serverURL = "http://ecouteentretien-vente.rhcloud.com/${appName}"
+    grails.plugin.springsecurity.portMapper.httpPort = 80
+    grails.plugin.springsecurity.portMapper.httpsPort = 443
+    grails.plugin.springsecurity.secureChannel.definition = [
+      '/**':  'REQUIRES_SECURE_CHANNEL'
+    ]
+//    grails.plugin.springsecurity.secureChannel.useHeaderCheckChannelSecurity = true
+    grails.plugin.springsecurity.auth.forceHttps = true
   }
 }
 
