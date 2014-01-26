@@ -2396,10 +2396,10 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
 						<div class="list-group col-xs-12 col-xs-12">
 						<div class="row">
 							<div class="col-xs-12" style="border: 1px; font-size: 8px;">
-								Points faibles: ${eev.answers.find{a -> a.question.id == group.weaknessesQuestion.id}?.answer}
+								Points faibles: ${eev.answers.find{a -> a.question.id == group.weaknessesQuestion?.question?.id}?.answer}
 							</div>
 							<div class="col-xs-12" style="border: 1px; font-size: 8px;">
-								Points forts: ${eev.answers.find{a -> a.question.id == group.strengthsQuestion.id}?.answer}
+								Points forts: ${eev.answers.find{a -> a.question.id == group.strengthsQuestion?.question?.id}?.answer}
 							</div>
 						</div>
 						<%

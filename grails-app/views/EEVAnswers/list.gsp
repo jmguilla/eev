@@ -22,7 +22,7 @@
 			<tr ng-repeat="eev in eevs|orderBy:predicate:reverse" ng-cloak>
 				<td ng-if="eev.synced == true"><a href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.html">{{$index}}</a></td>
 				<td ng-if="eev.synced == false">{{$index}}</td>
-				<td ng-if="eev.synced == true"><a href="#" ng-click="sendPDF(eev.id)"><img alt="pdf" src="${resource(dir: 'images', file: 'pdfdownload.png')}" width="15px" height="auto"/></a></td>
+				<td ng-if="eev.synced == true"><span style="color: #3c763d;" class="glyphicon glyphicon-envelope" ng-show="!!pdf_sent[$index] == true"></span><a ng-hide="!!pdf_sent[$index] == true" href="#" ng-click="sendPDF(eev.id, $index)"><img alt="pdf" src="${resource(dir: 'images', file: 'pdfdownload.png')}" width="15px" height="auto"/></a></td>
 				<td ng-if="eev.synced == false"></td>
 				<td><span ng-if="eev.synced" style="color: #3c763d;" class="glyphicon glyphicon-ok"></span></td>
 				<td ng-if="eev.synced == true"><a href="${createLink(controller: 'EEVAnswers', action: 'show')}/{{eev.id}}.html"><span ng-if="!!eev.interviewee == true">{{eev.interviewee}}</span><span ng-if="!!eev.interviewee == false">Inconnu</span></a></td>

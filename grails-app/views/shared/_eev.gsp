@@ -11,7 +11,7 @@
 		<form role="form">
 		<div class="form-group">
 		  <div class="col-xs-12">
-		  	<input ng-model="$parent.interviewee" type="text" class="form-control" id="interviewee" placeholder="Vendeur" />
+		  	<input ng-model="$parent.$parent.interviewee" type="text" class="form-control" id="interviewee" placeholder="Vendeur" />
 		  </div>
 		</div>
 		</form>

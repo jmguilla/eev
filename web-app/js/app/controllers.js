@@ -77,13 +77,15 @@ app.controller('UserAccountCtrl', function($scope, $sce, User) {
 app.controller('EEVAnswersListCtrl', function($scope, EEVAnswers) {
 	$scope.predicate = 'synced';
 	$scope.reverse = 'true';
+	$scope.pdf_sent = [];
 	$scope.deleteEEV = function(eev){
 		if(confirm("Supprimer?")){
 			EEVAnswers.deleteEEV(eev, $scope);
 		}
 	};
-	$scope.sendPDF = function(id){
+	$scope.sendPDF = function(id, index){
 		EEVAnswers.sendPDF(id, $scope);
+		$scope.pdf_sent[index] = true;
 	};
 	EEVAnswers.loadLists($scope);
 });
@@ -98,6 +100,7 @@ app.controller('EEVAnswersShowCtrl', function($scope, EEVAnswers) {
 
 app.controller('EEVFillCtrl', function($scope, EEVQuestions, EEVAnswers) {
 	$scope.answers = {};
+	$scope.interviewee = "";
 	$scope.init = function(eevId) {
 		$scope.eevId = eevId;
 		EEVQuestions.get({
@@ -112,7 +115,6 @@ app.controller('EEVFillCtrl', function($scope, EEVQuestions, EEVAnswers) {
 		$scope.eevSubmitting = true;
 		EEVAnswers.answer({
 				eevId: $scope.eevId,
-				interviewer : $scope.interviewer,
 				interviewee : $scope.interviewee,
 				answers : $scope.answers
 			}, $scope);
