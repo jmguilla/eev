@@ -11,8 +11,8 @@
 			<div class="jumbotron">
 			  <h1>Gestion des EEVs</h1>
 			  <p>
-				  <a class="btn btn-primary btn-lg" role="button" href="${createLink(controller: 'EEVQuestions', action: 'show', id: 1)}">Remplir</a>
-				  <a class="btn btn-primary btn-lg" role="button" href="${createLink(controller: 'EEVAnswers', action: 'list')}">Lister</a>
+				  <a class="btn btn-primary btn-lg" role="button" onclick="parent.location='${createLink(controller: 'EEVQuestions', action: 'show', id: 1)}'">Remplir</a>
+				  <a class="btn btn-primary btn-lg" role="button" onclick="parent.location='${createLink(controller: 'EEVAnswers', action: 'list')}'">Lister</a>
 			  </p>
 			</div>
 		</div>

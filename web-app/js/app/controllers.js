@@ -7,6 +7,9 @@ app.controller('MainCtrl', function($scope, $sce, User) {
 
 	function logEvent(event) {
 		console.log(event);
+		if(waterbug != undefined){
+			waterbug.log(event);
+		}
 	}
 	
 	function syncingBegins(event){
