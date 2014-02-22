@@ -33,7 +33,7 @@
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
 			    <li><a href="#" data-toggle="modal" data-target="#pointsForts{{$index}}">Points Forts</a></li>
-			    <li><a href="#" data-toggle="modal" data-target="#pointsFaibles{{$index}}">Points Faibles</a></li>
+			    <li><a href="#" data-toggle="modal" data-target="#pointsFaibles{{$index}}">Points A Ameliorer</a></li>
 			  </ul>
 			  
 			  <div class="modal fade" id="pointsForts{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -58,7 +58,7 @@
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				        <h4 class="modal-title" id="myModalLabel">Points Faibles</h4>
+				        <h4 class="modal-title" id="myModalLabel">Points A Ameliorer</h4>
 				      </div>
 				      <div class="modal-body">
 			 			<textarea class="form-control" ng-model="answers[group.weaknessesQuestion.question.id]"></textarea>
@@ -104,7 +104,7 @@
 				</div>
 			 	<div class="col-xs-12 col-md-4 pull-right hidden-xs hidden-sm">
 			 		<div class="panel panel-default">
-				 		<div class="panel-heading panel-title">Points faibles</div>
+				 		<div class="panel-heading panel-title">Points A Ameliorer</div>
 				 		<div class="panel-body">
 					 		<form role="form" style="height: 100%;">
 					 			<div class="form-group">
