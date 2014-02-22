@@ -41,7 +41,7 @@
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				        <h4 class="modal-title" id="myModalLabel">Points Forts</h4>
+				        <h4 class="modal-title" style="color: black;" id="myModalLabel">Points Forts</h4>
 				      </div>
 				      <div class="modal-body">
 			 			<textarea class="form-control" ng-model="answers[group.strengthsQuestion.question.id]"></textarea>
@@ -58,7 +58,7 @@
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				        <h4 class="modal-title" id="myModalLabel">Points A Ameliorer</h4>
+				        <h4 class="modal-title" style="color: black;" id="myModalLabel">Points A Ameliorer</h4>
 				      </div>
 				      <div class="modal-body">
 			 			<textarea class="form-control" ng-model="answers[group.weaknessesQuestion.question.id]"></textarea>
