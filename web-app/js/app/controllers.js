@@ -1,6 +1,29 @@
 'use strict';
+
+app.factory('onlineStatus', ["$window", "$rootScope", function ($window, $rootScope) {
+    var onlineStatus = {};
+
+    onlineStatus.onLine = $window.navigator.onLine;
+
+    onlineStatus.isOnline = function() {
+        return onlineStatus.onLine;
+    }
+
+    $window.addEventListener("online", function () {
+        onlineStatus.onLine = true;
+        $rootScope.$digest();
+    }, true);
+
+    $window.addEventListener("offline", function () {
+        onlineStatus.onLine = false;
+        $rootScope.$digest();
+    }, true);
+
+    return onlineStatus;
+}]);
+
 /* Controllers */
-app.controller('MainCtrl', function($scope, $sce, User) {
+app.controller('MainCtrl', function($scope, $sce, User, onlineStatus) {
 	$scope.alerts = [];
 	$scope.syncing = false;
 	$scope.synced = false;
@@ -41,10 +64,8 @@ app.controller('MainCtrl', function($scope, $sce, User) {
     window.onerror = function(m, u, l){
     	logEvent(m + "\n" + u + ": " + l);
     };
-    
      $scope.userNavCollapsed = $sce.trustAsHtml("<button type='button' class='btn navbar-btn btn-default dropdown-toggle hidden-sm hidden-md hidden-lg btn-dropdown-like no-collapse pull-left' data-toggle='dropdown'><span class='glyphicon glyphicon-ban-circle' style='color: #a94442;'></span></button>");
      $scope.userNav          = $sce.trustAsHtml("<button type='button' class='btn navbar-btn btn-default dropdown-toggle hidden-xs btn-dropdown-like pull-left' data-toggle='dropdown'><span class='glyphicon glyphicon-ban-circle' style='color: #a94442;'></span></button>");
-		
 		User.widgets({},
 		function(data, headers){
 			$scope.userNavCollapsed = $sce.trustAsHtml(data.navCollapsed);
@@ -53,11 +74,11 @@ app.controller('MainCtrl', function($scope, $sce, User) {
 		function(httpResponse){
 			$scope.alerts.push({type: 'danger', content: 'Un probleme s\'est produit: ' + httpResponse.data});
 		});
-		if(navigator.onLine && typeof(Storage)=="undefined"){
+		if(!onlineStatus.isOnline() && typeof(Storage) == "undefined"){
 			$scope.alerts.push({type: 'danger', content: 'Ce navigateur ne permet pas l\'utilisation de cette application sans connexion.'})
 			$scope.eevSubmitting = true;
 		}else{
-			if(typeof(Storage)=="undefined"){
+			if(typeof(Storage) == "undefined"){
 				$scope.alerts.push({type: 'warning', content: 'Ce navigateur ne permet pas l\'utilisation de cette application sans connexion...'})
 			}
 			$scope.eevSubmitting = false;
