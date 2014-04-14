@@ -114,6 +114,9 @@ environments {
     grails.plugin.springsecurity.portMapper.httpPort = 9090
     grails.plugin.springsecurity.portMapper.httpsPort = 18443
     grails.plugin.springsecurity.secureChannel.definition = [
+      '/images/**':        'ANY_CHANNEL',
+      '/js/**':        'ANY_CHANNEL',
+      '/css/**':        'ANY_CHANNEL',
       '/**':  'REQUIRES_SECURE_CHANNEL'
     ]
     //    grails.plugin.springsecurity.secureChannel.useHeaderCheckChannelSecurity = true
@@ -125,6 +128,9 @@ environments {
     grails.plugin.springsecurity.portMapper.httpPort = 80
     grails.plugin.springsecurity.portMapper.httpsPort = 443
     grails.plugin.springsecurity.secureChannel.definition = [
+      '/images/**':        'ANY_CHANNEL',
+      '/js/**':        'ANY_CHANNEL',
+      '/css/**':        'ANY_CHANNEL',
       '/**':  'REQUIRES_SECURE_CHANNEL'
     ]
     grails.plugin.springsecurity.secureChannel.useHeaderCheckChannelSecurity = true

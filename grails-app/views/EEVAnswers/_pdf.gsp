@@ -2426,7 +2426,7 @@ button.btn-dropdown-like,button.btn-dropdown-like.open{
 								<span class="pull-right">
 									<g:each in="${3..0}" var="faceIndex">
 									<% def answerIndex = eev.answers.find{a -> a.question.id == content.question.id}?.answer %>
-									<img src="${resource(dir:'images')}/face-${answerIndex && new Integer(answerIndex) == faceIndex? 'active': 'inactive'}-${faceIndex}.png" width="15px" height="auto" />
+									<img src="${resource(dir:'images', absolute: 'true')}/face-${answerIndex && new Integer(answerIndex) == faceIndex? 'active': 'inactive'}-${faceIndex}.png" width="15px" height="auto" />
 									</g:each>
 								</span>
 							</g:else>

@@ -97,6 +97,18 @@
 
  	<security-constraint>
         <web-resource-collection>
+        	<web-resource-name>no-ssl</web-resource-name>
+            <url-pattern>/images/*</url-pattern>
+            <url-pattern>/js/*</url-pattern>
+            <url-pattern>/css/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+ 	<security-constraint>
+        <web-resource-collection>
         	<web-resource-name>force-https</web-resource-name>
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
